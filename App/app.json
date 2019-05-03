@@ -1,0 +1,48 @@
+{
+  "expo": {
+    "name": "CSInvestment",
+    "slug": "CSInvestment",
+    "privacy": "public",
+    "sdkVersion": "32.0.0",
+    "ios": {
+      "bundleIdentifier": "com.targetonline.csinvestment",
+      "supportsTablet": true
+    },
+    "android": {
+      "package": "com.targetonline.csinvestment",
+      "versionCode": 2 
+    },
+    "platforms": [
+      "ios",
+      "android"
+    ],
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/csinvestment-icon.png",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "description": ""
+  },
+  "Environment":"Development",
+  "ApiRestWebServer":{
+    "Development":"http://192.168.0.101:5202",
+    "Production": "http://18.221.169.195:5202"
+  },
+  "FirebaseConfig":{
+        "apiKey": "AIzaSyD5S9lilEvIAq2PT8yGO-a2z6mtL2-r9Lc",
+        "authDomain": "csinvestment-9960f.firebaseapp.com",
+        "databaseURL": "https://csinvestment-9960f.firebaseio.com",
+        "projectId": "csinvestment-9960f",
+        "storageBucket": "csinvestment-9960f.appspot.com",
+        "messagingSenderId": "222752105548"
+  }
+}

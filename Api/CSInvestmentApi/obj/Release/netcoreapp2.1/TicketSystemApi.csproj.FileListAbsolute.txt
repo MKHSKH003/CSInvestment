@@ -1,0 +1,14 @@
+C:\Users\dell\Downloads\Projects\TicketSystem\Api\CSInvestmentApi\bin\Release\netcoreapp2.1\CSInvestmentApi.deps.json
+C:\Users\dell\Downloads\Projects\TicketSystem\Api\CSInvestmentApi\bin\Release\netcoreapp2.1\CSInvestmentApi.runtimeconfig.json
+C:\Users\dell\Downloads\Projects\TicketSystem\Api\CSInvestmentApi\bin\Release\netcoreapp2.1\CSInvestmentApi.runtimeconfig.dev.json
+C:\Users\dell\Downloads\Projects\TicketSystem\Api\CSInvestmentApi\bin\Release\netcoreapp2.1\CSInvestmentApi.dll
+C:\Users\dell\Downloads\Projects\TicketSystem\Api\CSInvestmentApi\bin\Release\netcoreapp2.1\CSInvestmentApi.pdb
+C:\Users\dell\Downloads\Projects\TicketSystem\Api\CSInvestmentApi\obj\Release\netcoreapp2.1\CSInvestmentApi.csprojResolveAssemblyReference.cache
+C:\Users\dell\Downloads\Projects\TicketSystem\Api\CSInvestmentApi\obj\Release\netcoreapp2.1\CSInvestmentApi.csproj.CoreCompileInputs.cache
+C:\Users\dell\Downloads\Projects\TicketSystem\Api\CSInvestmentApi\obj\Release\netcoreapp2.1\CSInvestmentApi.RazorAssemblyInfo.cache
+C:\Users\dell\Downloads\Projects\TicketSystem\Api\CSInvestmentApi\obj\Release\netcoreapp2.1\CSInvestmentApi.RazorAssemblyInfo.cs
+C:\Users\dell\Downloads\Projects\TicketSystem\Api\CSInvestmentApi\obj\Release\netcoreapp2.1\CSInvestmentApi.AssemblyInfoInputs.cache
+C:\Users\dell\Downloads\Projects\TicketSystem\Api\CSInvestmentApi\obj\Release\netcoreapp2.1\CSInvestmentApi.AssemblyInfo.cs
+C:\Users\dell\Downloads\Projects\TicketSystem\Api\CSInvestmentApi\obj\Release\netcoreapp2.1\CSInvestmentApi.RazorTargetAssemblyInfo.cache
+C:\Users\dell\Downloads\Projects\TicketSystem\Api\CSInvestmentApi\obj\Release\netcoreapp2.1\CSInvestmentApi.dll
+C:\Users\dell\Downloads\Projects\TicketSystem\Api\CSInvestmentApi\obj\Release\netcoreapp2.1\CSInvestmentApi.pdb

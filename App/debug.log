@@ -1,0 +1,2 @@
+[0419/180926.513:ERROR:filesystem_win.cc(148)] DeleteFile C:\Users\dell\AppData\Local\Google\Chrome\User Data\Crashpad\reports\cca84634-015e-49ef-9bcc-64de621f04a0.dmp: The process cannot access the file because it is being used by another process. (0x20)
+[0419/180928.860:ERROR:registration_protocol_win.cc(84)] TransactNamedPipe: The pipe has been ended. (0x6D)
