@@ -14,6 +14,9 @@ import {
 import Header from '../../containers/header/header.js';
 import LoadingCourses from '../../containers/courses/loading-courses'
 import UpdateSchedule from './update-schedule';
+import Dimensions from 'Dimensions';
+
+const DEVICE_HEIGHT = Dimensions.get('window').height;
 
 export default class ViewCourses extends Component {
 
@@ -144,7 +147,7 @@ const styles = StyleSheet.create({
   },
   cardImage:{
     flex: 1,
-    height: 150,
+    height: DEVICE_HEIGHT/3,
     width: null,
   },
   /******** card components **************/

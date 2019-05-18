@@ -45,6 +45,7 @@ export default class Students extends Component {
   render() {
       const {students, updatePassword, addCourses, updatePaymentStatus, deleteStudent, updateImage, student} = this.props;
       const imagePlaceHolder = 'https://i.stack.imgur.com/l60Hf.png';
+      //const student = {'id':36, 'name':'skhumbuzo','isAdmin':1} 
     return (
       <ScrollView>
       <Header props={this.props} />

@@ -9,9 +9,12 @@ import {
   FlatList
 } from 'react-native'
 import {Actions, ActionConst} from 'react-native-router-flux'
+import Dimensions from 'Dimensions';
 
 import Header from '../../containers/header/header.js'
 import Loader from '../loader/loading'
+
+const DEVICE_HEIGHT = Dimensions.get('window').height;
 
 export default class Groups extends Component {
 
@@ -103,7 +106,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderColor: "#FFFFFF",
     alignItems: 'flex-start',
-    height:165
+    height:DEVICE_HEIGHT/4.1
   },
   avatar: {
     width:55*2,

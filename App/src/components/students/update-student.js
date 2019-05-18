@@ -104,7 +104,7 @@ export default class UpdateStudent extends Component {
     return (
         <Modal
           animationType={'fade'}
-          transparent={true}
+          transparent={false}
           onRequestClose={() => setModalVisible(false)}
           visible={modalVisible}>
 
@@ -209,6 +209,7 @@ const styles = StyleSheet.create({
     width:90,
     height:90,
     borderRadius:5,
+    marginTop:10
   },
 
 
@@ -219,7 +220,7 @@ const styles = StyleSheet.create({
       width: 0,
       height: 6,
     },
-    shadowOpacity: 0.37,
+    //shadowOpacity: 0.37,
     shadowRadius: 7.49,
     elevation: 12,
 
@@ -265,18 +266,18 @@ const styles = StyleSheet.create({
  /************ modals ************/
   popup: {
     backgroundColor: 'white',
-    marginTop: 80,
-    marginHorizontal: 20,
-    borderRadius: 7,
+    //marginTop: 80,
+    //marginHorizontal: 20,
+    //borderRadius: 7,
   },
   popupOverlay: {
-    backgroundColor: "#00000057",
+    //backgroundColor: "#00000057",
     flex: 1,
-    marginTop: 30
+    //marginTop: 30
   },
   popupContent: {
-    margin: 5,
-    height:490,
+    //margin: 5,
+    //height:490,
   },
   popupHeader: {
     marginBottom: 45
@@ -297,6 +298,7 @@ const styles = StyleSheet.create({
     width:100,
     padding:5,
     alignItems:'center',
+    marginTop:20
   },
   modalInfo:{
     alignItems:'center',

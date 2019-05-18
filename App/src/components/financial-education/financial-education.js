@@ -12,8 +12,11 @@ import {
 } from 'react-native';
 import {Actions, ActionConst} from 'react-native-router-flux';
 import ImageLoad from 'react-native-image-placeholder';
+import Dimensions from 'Dimensions';
 
 import Header from '../../containers/header/header.js';
+
+const DEVICE_HEIGHT = Dimensions.get('window').height;
 
 export default class Blog extends Component {
 
@@ -59,7 +62,7 @@ export default class Blog extends Component {
               <TouchableOpacity onPress={()=> this.navigation(item.title)}> 
               <View style={styles.card}>
                 <ImageLoad
-                      style={{width: null, height: 200}}
+                      style={{width: null, height: DEVICE_HEIGHT/3}}
                       loadingStyle={{ size: 'large', color: 'blue' }}
                       source={item.image}
                   />

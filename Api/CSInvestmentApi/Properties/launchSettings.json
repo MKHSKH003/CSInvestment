@@ -18,7 +18,7 @@
     "CSInvestmentApi": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "http://localhost:5202/api/students/get-students",
+      "launchUrl": "http://localhost:5202/welcome/welcome-note",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },

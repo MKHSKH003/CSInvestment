@@ -94,7 +94,7 @@ export default class UpdateSettings extends Component {
     return (
         <Modal
           animationType={'fade'}
-          transparent={true}
+          transparent={false}
           onRequestClose={() => setModalVisible(false)}
           visible={modalVisible}>
 
@@ -244,9 +244,7 @@ const styles = StyleSheet.create({
     borderRadius: 7,
   },
   popupOverlay: {
-    backgroundColor: "#00000057",
-    flex: 1,
-    marginTop: 30
+    flex: 2,
   },
   popupContent: {
     margin: 5,

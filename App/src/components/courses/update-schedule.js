@@ -52,7 +52,7 @@ export default class Users extends Component {
                     <Text style={styles.about}>Time: {courseSelected.time}</Text>
               
                 <DatePicker
-                  style={{width: 200, marginTop:20, alignSelf:'center', alignItems:'çenter',justifyContent:'center'}}
+                  style={{width: 200, marginTop:20, alignSelf:'center', alignItems:'center',justifyContent:'center'}}
                   date={this.state.date=="none"? "": this.state.date }
                   mode="datetime"
                   placeholder="select date"
