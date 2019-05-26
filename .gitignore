@@ -1,1 +1,6 @@
 *.json
+/Api/.vs
+/Api/CSInvestmentApi/bin
+/Api/CSInvestmentApi/bin/Debug
+bin
+/Api/CSInvestmentApi/obj

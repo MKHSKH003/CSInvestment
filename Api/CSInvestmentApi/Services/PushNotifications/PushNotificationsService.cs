@@ -32,8 +32,13 @@ namespace CSInvestmentApi.Services
                     Username = username,
                     DeviceToken = deviceToken
                 });
-                _ticketSystemDbContext.SaveChanges();
             }
+            else if (checkIfExists.DeviceToken != deviceToken)
+            {
+                checkIfExists.DeviceToken = deviceToken;
+                _ticketSystemDbContext.PushNotifications.Update(checkIfExists);
+            }
+            _ticketSystemDbContext.SaveChanges();
             return Get();
         }
     }

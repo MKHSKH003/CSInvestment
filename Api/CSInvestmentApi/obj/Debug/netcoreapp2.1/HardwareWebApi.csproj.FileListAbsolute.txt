@@ -1,9 +1,0 @@
-C:\Users\dell\Downloads\Web-Api-with-.NetCore-Mysql-master\CSInvestmentApi\bin\Debug\netcoreapp2.1\CSInvestmentApi.deps.json
-C:\Users\dell\Downloads\Web-Api-with-.NetCore-Mysql-master\CSInvestmentApi\bin\Debug\netcoreapp2.1\CSInvestmentApi.dll
-C:\Users\dell\Downloads\Web-Api-with-.NetCore-Mysql-master\CSInvestmentApi\bin\Debug\netcoreapp2.1\CSInvestmentApi.pdb
-C:\Users\dell\Downloads\Web-Api-with-.NetCore-Mysql-master\CSInvestmentApi\obj\Debug\netcoreapp2.1\CSInvestmentApi.csprojResolveAssemblyReference.cache
-C:\Users\dell\Downloads\Web-Api-with-.NetCore-Mysql-master\CSInvestmentApi\obj\Debug\netcoreapp2.1\CSInvestmentApi.csproj.CoreCompileInputs.cache
-C:\Users\dell\Downloads\Web-Api-with-.NetCore-Mysql-master\CSInvestmentApi\obj\Debug\netcoreapp2.1\CSInvestmentApi.AssemblyInfoInputs.cache
-C:\Users\dell\Downloads\Web-Api-with-.NetCore-Mysql-master\CSInvestmentApi\obj\Debug\netcoreapp2.1\CSInvestmentApi.AssemblyInfo.cs
-C:\Users\dell\Downloads\Web-Api-with-.NetCore-Mysql-master\CSInvestmentApi\obj\Debug\netcoreapp2.1\CSInvestmentApi.dll
-C:\Users\dell\Downloads\Web-Api-with-.NetCore-Mysql-master\CSInvestmentApi\obj\Debug\netcoreapp2.1\CSInvestmentApi.pdb
