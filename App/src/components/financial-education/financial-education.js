@@ -33,7 +33,6 @@ export default class Blog extends Component {
   navigation(title)
   {
     if(title == 'Market Updates'){
-      this.props.loadMarketUpdates();
       Actions.marketUpdates({color:"green",title:"Market Updates"});
     }
     else{

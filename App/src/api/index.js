@@ -5,6 +5,7 @@ import * as chatMessagesApi from './chatMessagesApi';
 import * as chatRoomsApi from './chatRoomsApi';
 import * as marketUpdatesApi from './marketUpdatesApi';
 import * as pushNotificationsApi from './pushNotificationsApi';
+import * as systemDataApi from './systemDataApi';
 
 export {
     loginApi,
@@ -13,5 +14,6 @@ export {
     chatMessagesApi,
     chatRoomsApi,
     marketUpdatesApi,
-    pushNotificationsApi
+    pushNotificationsApi,
+    systemDataApi
 }

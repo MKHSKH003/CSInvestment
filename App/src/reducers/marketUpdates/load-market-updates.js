@@ -1,6 +1,7 @@
 import {
  LOAD_MARKET_UPDATES_REQUEST,
  LOAD_MARKET_UPDATES_SUCCESS,
+ LOAD_MARKET_UPDATES__SYSTEM_DATA_REQUEST
 } from '../../actions/marketUpdatesActions'
 
 export const initialState = {
@@ -12,7 +13,14 @@ export const initialState = {
 
 const loadMarketUpdatesReducer = (state = initialState, action) => {
   switch (action.type) {
-    case LOAD_MARKET_UPDATES_REQUEST:{
+    case LOAD_MARKET_UPDATES__SYSTEM_DATA_REQUEST:{
+        return { ...state,
+                status:{
+                    loading:true
+                 }
+        };
+     }
+     case LOAD_MARKET_UPDATES_REQUEST:{
         return { ...state,
                 status:{
                     loading:true

@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using CSInvestmentApi.Entities;
-using System.Threading.Tasks;
 
 namespace CSInvestmentApi.Services
 {
@@ -32,5 +31,6 @@ namespace CSInvestmentApi.Services
         {
             _statisticsService.LogEvent(username, "logged-off");
         }
+
     }
 }

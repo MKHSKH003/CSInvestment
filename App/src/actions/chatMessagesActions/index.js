@@ -6,19 +6,20 @@ export const SEND_MESSAGE_REQUEST = 'SEND_MESSAGE_REQUEST';
 export const SEND_MESSAGE_SUCCESS = 'SEND_MESSAGE_SUCCESS';
 
 export const LOAD_ALL_MESSAGES_REQUEST = 'LOAD_ALL_MESSAGES_REQUEST';
+export const LOAD_MESSAGES_SYSTEM_DATA_REQUEST = 'LOAD_MESSAGES_SYSTEM_DATA_REQUEST';
 
-export const loadAllMessagesRequest = () => {
-    return{
+export const loadMessagesSystemDataRequest = () => ({
       type: LOAD_ALL_MESSAGES_REQUEST,
-   }
-};
+});
 
-export const loadMessagesRequest = (id) => {
-    return{
+export const loadAllMessagesRequest = () => ({
+      type: LOAD_ALL_MESSAGES_REQUEST,
+});
+
+export const loadMessagesRequest = (id) => ({
       type: LOAD_MESSAGES_REQUEST,
       id
-   }
-};
+});
 
 export const loadMessagesSuccess = (messages) => ({
       type: LOAD_MESSAGES_SUCCESS,

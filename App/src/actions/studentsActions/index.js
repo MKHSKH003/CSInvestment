@@ -6,6 +6,12 @@ export const LOAD_STUDENTS_REQUEST = 'LOAD_STUDENTS_REQUEST';
 export const LOAD_STUDENTS_SUCCESS = 'LOAD_STUDENTS_SUCCESS';
 export const LOAD_STUDENTS_FAILURE = 'LOAD_STUDENTS_FAILURE';
 
+export const LOAD_SYSTEM_DATA_REQUEST = 'LOAD_SYSTEM_DATA_REQUEST';
+export const LOAD_SYSTEM_DATA_SUCCESS = 'LOAD_SYSTEM_DATA_SUCCESS';
+export const LOAD_SYSTEM_DATA_FAILURE = 'LOAD_SYSTEM_DATA_FAILURE';
+
+export const LOAD_STUDENTS_SYSTEM_DATA_REQUEST = 'LOAD_STUDENTS_SYSTEM_DATA_REQUEST';
+
 export const UPDATE_IMAGE_REQUEST = 'UPDATE_IMAGE_REQUEST';
 export const UPDATE_PAYMENT_STATUS_REQUEST = 'UPDATE_PAYMENT_STATUS_REQUEST';
 export const DELETE_REQUEST = 'DELETE_REQUEST';
@@ -25,6 +31,10 @@ export const addStudentSuccess = () => ({
 
 export const addStudentFailure = () => ({
       type: ADD_STUDENT_FAILURE,
+});
+
+export const loadStudentsSystemDataRequest = () => ({
+      type: LOAD_STUDENTS_SYSTEM_DATA_REQUEST,
 });
 
 export const loadStudentsRequest = () => {
@@ -68,4 +78,16 @@ export const addCoursesRequest = (id, courses, createdBy) => ({
       id,
       courses,
       createdBy
+});
+
+
+export const loadSystemDataRequest = () => {
+    return{
+      type: LOAD_SYSTEM_DATA_REQUEST,
+   }
+};
+
+export const loadSystemDataSuccess = (systemData) => ({
+      type: LOAD_SYSTEM_DATA_SUCCESS,
+      systemData
 });

@@ -19,6 +19,7 @@ import {marketUpdatesSaga} from '../sagas/marketUpdates/market-updates'
 import {postMarketUpdateSaga} from '../sagas/marketUpdates/post-market-update'
 import {deleteMarketUpdateSaga} from '../sagas/marketUpdates/delete-market-update'
 import {pushNotificationsSaga} from '../sagas/pushNotifications/push-notifications'
+import {getSystemDataSaga} from '../sagas/systemData/get-system-data'
 
 export default function* () {
     yield all([
@@ -40,7 +41,8 @@ export default function* () {
         marketUpdatesSaga(),
         postMarketUpdateSaga(),
         deleteMarketUpdateSaga(),
-        pushNotificationsSaga()
+        pushNotificationsSaga(),
+        getSystemDataSaga()
    ]);
 }
 

@@ -7,3 +7,4 @@ export const chatRoomsBaseUrl = baseUrl+'/api/chat-rooms/';
 export const chatMessagesBaseUrl = baseUrl+'/api/chatMessages/';
 export const marketUpdatesBaseUrl = baseUrl+'/api/market-updates/';
 export const pushNotificationsBaseUrl = baseUrl+'/api/push-notifications/';
+export const systemDataBaseUrl = baseUrl+'/api/system-data/';

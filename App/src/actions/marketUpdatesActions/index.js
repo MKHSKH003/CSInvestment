@@ -4,20 +4,21 @@ export const LOAD_MARKET_UPDATES_FAILURE = 'LOAD_MARKET_UPDATES_FAILURE';
 
 export const POST_MARKET_UPDATE_REQUEST = 'POST_MARKET_UPDATE_REQUEST';
 export const DELETE_REQUEST = 'DELETE_REQUEST';
+export const LOAD_MARKET_UPDATES__SYSTEM_DATA_REQUEST = 'LOAD_MARKET_UPDATES__SYSTEM_DATA_REQUEST';
 
-export const PostMarketUpdateRequest = (avatar, caption) => {
-    return{
+export const loadMarketUpdatesSystemDataRequest = () => ({
+      type: LOAD_MARKET_UPDATES__SYSTEM_DATA_REQUEST
+});
+
+export const loadMarketUpdatesRequest = () => ({
+      type: LOAD_MARKET_UPDATES_REQUEST
+});
+
+export const PostMarketUpdateRequest = (avatar, caption) =>  ({
       type: POST_MARKET_UPDATE_REQUEST,
       avatar,
       caption
-   }
-};
-
-export const loadMarketUpdatesRequest = () => {
-    return{
-      type: LOAD_MARKET_UPDATES_REQUEST
-   }
-};
+});
 
 export const loadMarketUpdatesSuccess = (marketUpdates) => ({
       type: LOAD_MARKET_UPDATES_SUCCESS,

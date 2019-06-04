@@ -46,7 +46,8 @@ namespace CSInvestmentApi
             services.AddScoped<IMessagesService, MessagesService>();
             services.AddScoped<ICoursesService, CoursesService>();
             services.AddScoped<IStudentService, StudentService>();
-            services.AddScoped<ILoginService, LoginService>(); 
+            services.AddScoped<ILoginService, LoginService>();
+            services.AddScoped<ISystemDataService, SystemDataService>();
             services.AddMvc();
         }
 

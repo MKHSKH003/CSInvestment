@@ -1,7 +1,8 @@
 import {
  LOAD_GROUPS_REQUEST,
  LOAD_GROUPS_SUCCESS,
- LOAD_GROUPS_FAILURE
+ LOAD_GROUPS_FAILURE,
+ LOAD_GROUPS_SYSTEM_DATA_REQUEST
 } from '../../actions/chatRoomsActions'
 
 export const initialState = {
@@ -13,9 +14,15 @@ export const initialState = {
 
 const loadGroupsReducer = (state = initialState, action) => {
   switch (action.type) {
-    case LOAD_GROUPS_REQUEST:{
+    case LOAD_GROUPS_SYSTEM_DATA_REQUEST:{
         return { ...state,
-                groups:[],
+                status:{
+                    loading:true
+                 }
+        };
+     }
+     case LOAD_GROUPS_REQUEST:{
+        return { ...state,
                 status:{
                     loading:true
                  }

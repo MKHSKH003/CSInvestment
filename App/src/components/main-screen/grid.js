@@ -43,16 +43,18 @@ export default class MainGrid extends Component {
     Actions.statistics({color:color,title:screen})
   }
   navigate(screen, color){
+    
      if(screen =='NEW STUDENT'){this.props.currentUser.isAdmin == 1 ? Actions.addStudent({color:color,title:screen}) : this.props.sendInfo("Access denied");}
-     else if(screen =='STUDENTS'){this.props.onLoadStudents();Actions.viewStudents({color:color,title:screen});}
-     else if(screen =='COURSES'){this.props.onLoadMessages();this.props.onLoadStudentCourses();this.props.onLoadCourses();Actions.courses({color:color,title:screen});}
+     else if(screen =='STUDENTS'){Actions.viewStudents({color:color,title:screen});}
+     else if(screen =='COURSES'){Actions.courses({color:color,title:screen});}
      else if(screen =='FINANCIAL EDUCATION'){Actions.financialEducation({color:color,title:screen});}  
      else if(screen =='STATISTICS'){this.props.currentUser.isAdmin == 1 ? this.openStats(screen, color): this.props.sendInfo("Access Denied") } 
-     else if(screen =='CHAT ROOM'){this.props.onLoadGroups();Actions.chatrooms({color:color,title:screen});}  
+     else if(screen =='CHAT ROOM'){Actions.chatrooms({color:color,title:screen});}  
   }
 
   componentDidMount(){
-    //this.props.currentUser = {'id':36, 'name':'skhumbuzo','isAdmin':1} 
+    // this.props.currentUser = {'id':36, 'name':'skhumbuzo','isAdmin':1}
+    this.props.onLoadSystemData();
     this.registerForPushNotificationsAsync();
   }
   

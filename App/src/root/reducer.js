@@ -11,6 +11,7 @@ import loadGroupsReducer from '../reducers/chatRooms/load-groups'
 import loadAllMessagesReducer from '../reducers/chatMessages/load-all-messages'
 import loadMarketUpdatesReducer from '../reducers/marketUpdates/load-market-updates'
 import pushNotificationsReducer from '../reducers/pushNotifications/push-notifications'
+import loadSystemDataReducer from '../reducers/systemData/load-system-data'
 
 const rootReducer = combineReducers({
     loginReducer,
@@ -23,6 +24,7 @@ const rootReducer = combineReducers({
     loadGroupsReducer,
     loadMarketUpdatesReducer,
     pushNotificationsReducer,
+    loadSystemDataReducer,
     toast
 });
 

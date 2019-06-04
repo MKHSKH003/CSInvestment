@@ -74,7 +74,6 @@ export default class MarketUpdates extends Component {
     return (
       <ScrollView>
       <Header props={this.props} />
-      <Loader loading={loading}/>
       
       {!loading && currentUser.isAdmin == 1 &&
       <Button

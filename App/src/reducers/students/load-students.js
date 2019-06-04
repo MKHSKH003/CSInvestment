@@ -1,4 +1,5 @@
 import {
+ LOAD_STUDENTS_SYSTEM_DATA_REQUEST,
  LOAD_STUDENTS_REQUEST,
  LOAD_STUDENTS_SUCCESS,
  LOAD_STUDENTS_FAILURE
@@ -14,9 +15,15 @@ export const initialState = {
 
 const loadStudentsReducer = (state = initialState, action) => {
   switch (action.type) {
+    case LOAD_STUDENTS_SYSTEM_DATA_REQUEST:{
+        return { ...state,
+                status:{
+                    loading:true
+                 }
+        };
+     }
     case LOAD_STUDENTS_REQUEST:{
         return { ...state,
-                students:[],
                 status:{
                     loading:true
                  }

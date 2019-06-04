@@ -1,7 +1,8 @@
 import {
  LOAD_ALL_MESSAGES_REQUEST,
  LOAD_MESSAGES_SUCCESS,
- LOAD_MESSAGES_FAILURE
+ LOAD_MESSAGES_FAILURE,
+ LOAD_MESSAGES_SYSTEM_DATA_REQUEST
 } from '../../actions/chatMessagesActions'
 
 export const initialState = {
@@ -13,9 +14,15 @@ export const initialState = {
 
 const loadAllMessagesReducer = (state = initialState, action) => {
   switch (action.type) {
-    case LOAD_ALL_MESSAGES_REQUEST:{
+    case LOAD_MESSAGES_SYSTEM_DATA_REQUEST:{
         return { ...state,
-                messages:[],
+                status:{
+                    loading:true
+                 }
+        };
+     }
+     case LOAD_ALL_MESSAGES_REQUEST:{
+        return { ...state,
                 status:{
                     loading:true
                  }

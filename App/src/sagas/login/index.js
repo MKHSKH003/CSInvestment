@@ -20,7 +20,7 @@ export function* userLogin(action) {
       let student = yield call(loginApi.login,loginBaseUrl,action.username, action.password);
       if(student==undefined){throw Error;}
       Actions.mainScreen();
-      yield put(ToastActionsCreators.displaySuccess('Welcome '+action.username, 5000));
+      yield put(ToastActionsCreators.displaySuccess('Welcome. '+action.username, 5000));
       yield put(loginSuccess(student));
    
   }

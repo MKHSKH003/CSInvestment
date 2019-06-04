@@ -1,7 +1,8 @@
 import {
  LOAD_COURSES_REQUEST,
  LOAD_COURSES_SUCCESS,
- LOAD_COURSES_FAILURE
+ LOAD_COURSES_FAILURE,
+ LOAD_COURSES_SYSTEM_DATA_REQUEST
 } from '../../actions/coursesActions'
 
 export const initialState = {
@@ -14,9 +15,15 @@ export const initialState = {
 
 const loadCoursesReducer = (state = initialState, action) => {
   switch (action.type) {
-    case LOAD_COURSES_REQUEST:{
+    case LOAD_COURSES_SYSTEM_DATA_REQUEST:{
         return { ...state,
-                courses:[],
+                status:{
+                    loading:true
+                 }
+        };
+     }
+     case LOAD_COURSES_REQUEST:{
+        return { ...state,
                 status:{
                     loading:true
                  }
