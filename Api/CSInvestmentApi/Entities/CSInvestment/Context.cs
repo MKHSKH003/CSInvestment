@@ -15,290 +15,272 @@ namespace CSInvestmentApi.Entities
             _environmentConfig = environmentConfig.Value;
         }
 
-        public virtual DbSet<Users> Users { get; set; }
+        public virtual DbSet<ChatRoom> ChatRoom { get; set; }
+        public virtual DbSet<Course> Course { get; set; }
+        public virtual DbSet<DeviceToken> DeviceToken { get; set; }
+        public virtual DbSet<Message> Message { get; set; }
         public virtual DbSet<Online> Online { get; set; }
-        public virtual DbSet<Students> Students { get; set; }
-        public virtual DbSet<Movies> Movies { get; set; }
-        public virtual DbSet<Messages> Messages { get; set; }
-        public virtual DbSet<Courses> Courses { get; set; }
-        public virtual DbSet<StudentCourses> StudentCourses { get; set; }
-        public virtual DbSet<ChatRoomMessages> ChatRoomMessages { get; set; }
-        public virtual DbSet<ChatRooms> ChatRooms { get; set; }
-        public virtual DbSet<MarketUpdates> MarketUpdates { get; set; }
-        public virtual DbSet<PushNotifications> PushNotifications { get; set; }
+        public virtual DbSet<Post> Post { get; set; }
+        public virtual DbSet<Student> Student { get; set; }
+        public virtual DbSet<StudentCourse> StudentCourse { get; set; }
+        public virtual DbSet<StudentChatRoom> StudentChatRoom { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             var database = _environmentConfig.Database;
             modelBuilder.HasAnnotation("ProductVersion", "2.2.0-rtm-35687");
 
-            modelBuilder.Entity<Students>(entity =>
+            modelBuilder.Entity<ChatRoom>(entity =>
             {
-                entity.ToTable("students", database);
+                entity.ToTable("ChatRoom", database);
+
+                entity.HasIndex(e => e.CourseId)
+                    .HasName("FK_ChatRoom_Course");
 
                 entity.Property(e => e.Id)
-                    .HasColumnName("id")
+                    .HasColumnName("ID")
                     .HasColumnType("int(11)");
 
-                entity.Property(e => e.Cell)
+                entity.Property(e => e.Avatar)
                     .IsRequired()
-                    .HasColumnName("cell")
-                    .HasMaxLength(255)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.Courses)
-                    .IsRequired()
-                    .HasColumnName("courses")
-                    .HasMaxLength(255)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.Email)
-                    .IsRequired()
-                    .HasColumnName("email")
-                    .HasMaxLength(255)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.Image)
-                    .IsRequired()
-                    .HasColumnName("image")
                     .HasMaxLength(500)
                     .IsUnicode(false);
 
-                entity.Property(e => e.IsAdmin)
-                    .HasColumnName("isAdmin")
-                    .HasColumnType("int(11)");
-
-                entity.Property(e => e.Location)
-                    .IsRequired()
-                    .HasColumnName("location")
-                    .HasMaxLength(255)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.Name)
-                    .IsRequired()
-                    .HasColumnName("name")
-                    .HasMaxLength(255)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.Password)
-                    .IsRequired()
-                    .HasColumnName("password")
-                    .HasMaxLength(255)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.PaymentStatus)
-                    .IsRequired()
-                    .HasColumnName("paymentStatus")
-                    .HasMaxLength(255)
-                    .IsUnicode(false);
-
-            });
-
-            modelBuilder.Entity<Users>(entity =>
-            {
-                entity.ToTable("users", database);
-
-                entity.Property(e => e.Id)
-                    .HasColumnName("id")
-                    .HasColumnType("int(11)");
-
-                entity.Property(e => e.IsAdmin)
-                    .HasColumnName("isAdmin")
+                entity.Property(e => e.CourseId)
+                    .HasColumnName("CourseID")
                     .HasColumnType("int(11)");
 
                 entity.Property(e => e.Name)
                     .IsRequired()
-                    .HasColumnName("name")
-                    .HasMaxLength(255)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.Password)
-                    .IsRequired()
-                    .HasColumnName("password")
                     .HasMaxLength(255)
                     .IsUnicode(false);
             });
 
-            modelBuilder.Entity<Online>(entity =>
+            modelBuilder.Entity<Course>(entity =>
             {
-                entity.ToTable("online", database);
+                entity.ToTable("Course", database);
 
                 entity.Property(e => e.Id)
-                    .HasColumnName("id")
-                    .HasColumnType("int(11)");
-
-                entity.Property(e => e.Username)
-                    .IsRequired()
-                    .HasColumnName("username")
-                    .HasMaxLength(255)
-                    .IsUnicode(false);
-
-            });
-
-            modelBuilder.Entity<Courses>(entity =>
-            {
-                entity.ToTable("courses", database);
-
-                entity.Property(e => e.Id)
-                    .HasColumnName("id")
-                    .HasColumnType("int(11)");
-
-                entity.Property(e => e.ChatRoomId)
-                    .HasColumnName("chatRoomId")
+                    .HasColumnName("ID")
                     .HasColumnType("int(11)");
 
                 entity.Property(e => e.Description)
                     .IsRequired()
-                    .HasColumnName("description")
                     .HasMaxLength(255)
                     .IsUnicode(false);
 
                 entity.Property(e => e.Image)
                     .IsRequired()
-                    .HasColumnName("image")
                     .HasMaxLength(500)
                     .IsUnicode(false);
 
                 entity.Property(e => e.Name)
                     .IsRequired()
-                    .HasColumnName("name")
                     .HasMaxLength(255)
                     .IsUnicode(false);
 
                 entity.Property(e => e.Time)
                     .IsRequired()
-                    .HasColumnName("time")
                     .HasMaxLength(255)
                     .IsUnicode(false);
 
                 entity.Property(e => e.Venue)
                     .IsRequired()
-                    .HasColumnName("venue")
                     .HasMaxLength(255)
                     .IsUnicode(false);
             });
 
-            modelBuilder.Entity<MarketUpdates>(entity =>
+            modelBuilder.Entity<DeviceToken>(entity =>
             {
-                entity.ToTable("marketUpdates", database);
+                entity.ToTable("DeviceToken", database);
+
+                entity.HasIndex(e => e.StudentId)
+                    .HasName("FK_PushNotification_Student");
 
                 entity.Property(e => e.Id)
-                    .HasColumnName("id")
+                    .HasColumnName("ID")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.UserDeviceToken)
+                    .IsRequired()
+                    .HasColumnName("DeviceToken")
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.StudentId)
+                    .HasColumnName("StudentID")
+                    .HasColumnType("int(11)");
+            });
+
+            modelBuilder.Entity<Message>(entity =>
+            {
+                entity.ToTable("Message", database);
+
+                entity.HasIndex(e => e.StudentId)
+                    .HasName("FK_Message_Student");
+
+                entity.Property(e => e.Id)
+                    .HasColumnName("ID")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.ChatRoomId).HasColumnType("int(11)");
+
+                entity.Property(e => e.Date)
+                    .IsRequired()
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.UserMessage)
+                    .IsRequired()
+                    .HasColumnName("Message")
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.StudentId)
+                    .HasColumnName("StudentID")
+                    .HasColumnType("int(11)");
+            });
+
+            modelBuilder.Entity<Online>(entity =>
+            {
+                entity.ToTable("Online", database);
+
+                entity.HasIndex(e => e.StudentId)
+                    .HasName("FK_Online_Student");
+
+                entity.Property(e => e.Id)
+                    .HasColumnName("ID")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.StudentId)
+                    .HasColumnName("StudentID")
+                    .HasColumnType("int(11)");
+            });
+
+            modelBuilder.Entity<Post>(entity =>
+            {
+                entity.ToTable("Post", database);
+
+                entity.HasIndex(e => e.StudentId)
+                    .HasName("FK_Post_Student");
+
+                entity.Property(e => e.Id)
+                    .HasColumnName("ID")
                     .HasColumnType("int(255)");
 
                 entity.Property(e => e.Avatar)
                     .IsRequired()
-                    .HasColumnName("avatar")
                     .HasMaxLength(255)
                     .IsUnicode(false);
 
                 entity.Property(e => e.Caption)
                     .IsRequired()
-                    .HasColumnName("caption")
                     .HasMaxLength(255)
                     .IsUnicode(false);
 
                 entity.Property(e => e.Datetime)
                     .IsRequired()
-                    .HasColumnName("datetime")
                     .HasMaxLength(255)
                     .IsUnicode(false);
-            });
-
-            modelBuilder.Entity<StudentCourses>(entity =>
-            {
-                entity.ToTable("studentCourses", database);
-
-                entity.Property(e => e.Id)
-                    .HasColumnName("id")
-                    .HasColumnType("int(11)");
-
-                entity.Property(e => e.CourseId)
-                    .HasColumnName("courseId")
-                    .HasColumnType("int(11)");
 
                 entity.Property(e => e.StudentId)
-                    .HasColumnName("studentId")
+                    .HasColumnName("StudentID")
                     .HasColumnType("int(11)");
             });
 
-            modelBuilder.Entity<ChatRoomMessages>(entity =>
+            modelBuilder.Entity<Student>(entity =>
             {
-                entity.ToTable("chatRoomMessages", database);
+                entity.ToTable("Student", database);
 
                 entity.Property(e => e.Id)
-                    .HasColumnName("id")
+                    .HasColumnName("ID")
                     .HasColumnType("int(11)");
 
-                entity.Property(e => e.ChatRoomId)
-                    .HasColumnName("chatRoomId")
-                    .HasColumnType("int(11)");
-
-                entity.Property(e => e.Date)
+                entity.Property(e => e.Cell)
                     .IsRequired()
-                    .HasColumnName("date")
                     .HasMaxLength(255)
                     .IsUnicode(false);
 
-                entity.Property(e => e.Message)
+                entity.Property(e => e.Email)
                     .IsRequired()
-                    .HasColumnName("message")
                     .HasMaxLength(255)
                     .IsUnicode(false);
 
-                entity.Property(e => e.Username)
+                entity.Property(e => e.Image)
                     .IsRequired()
-                    .HasColumnName("username")
+                    .HasMaxLength(500)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.IsAdmin).HasColumnType("int(11)");
+
+                entity.Property(e => e.Location)
+                    .IsRequired()
                     .HasMaxLength(255)
                     .IsUnicode(false);
-            });
-
-            modelBuilder.Entity<ChatRooms>(entity =>
-            {
-                entity.ToTable("chatRooms", database);
-
-                entity.Property(e => e.Id)
-                    .HasColumnName("id")
-                    .HasColumnType("int(11)");
 
                 entity.Property(e => e.Name)
                     .IsRequired()
-                    .HasColumnName("name")
                     .HasMaxLength(255)
                     .IsUnicode(false);
 
-                entity.Property(e => e.Avatar)
+                entity.Property(e => e.Password)
                     .IsRequired()
-                    .HasColumnName("avatar")
-                    .HasMaxLength(500)
+                    .HasMaxLength(255)
                     .IsUnicode(false);
+
+                entity.Property(e => e.PaymentStatus)
+                    .IsRequired()
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+
             });
 
-            modelBuilder.Entity<PushNotifications>(entity =>
+            modelBuilder.Entity<StudentCourse>(entity =>
             {
-                entity.ToTable("pushNotifications", database);
+                entity.ToTable("StudentCourse", database);
+
+                entity.HasIndex(e => e.CourseId)
+                    .HasName("FK_StudentCourses_Course");
+
+                entity.HasIndex(e => e.StudentId)
+                    .HasName("FK_StudentCourses_Student");
 
                 entity.Property(e => e.Id)
-                    .HasColumnName("id")
+                    .HasColumnName("ID")
                     .HasColumnType("int(11)");
 
-                entity.Property(e => e.DeviceToken)
-                    .IsRequired()
-                    .HasColumnName("deviceToken")
-                    .HasMaxLength(255)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.UserId)
-                    .HasColumnName("userId")
+                entity.Property(e => e.CourseId)
+                    .HasColumnName("CourseID")
                     .HasColumnType("int(11)");
 
-                entity.Property(e => e.Username)
-                    .IsRequired()
-                    .HasColumnName("username")
-                    .HasMaxLength(255)
-                    .IsUnicode(false);
+                entity.Property(e => e.StudentId)
+                    .HasColumnName("StudentID")
+                    .HasColumnType("int(11)");
             });
 
+            modelBuilder.Entity<StudentChatRoom>(entity =>
+            {
+                entity.ToTable("StudentChatRoom", database);
+
+                entity.Property(e => e.Id).HasColumnName("ID").HasColumnType("int(11)");
+
+                entity.Property(e => e.ChatRoomId).HasColumnName("ChatRoomID").HasColumnType("int(11)");
+
+                entity.Property(e => e.StudentId).HasColumnName("StudentID").HasColumnType("int(11)");
+
+                entity.HasOne(scr => scr.Student)
+                    .WithMany(s => s.StudentChatRooms)
+                    .HasForeignKey(e => e.StudentId)
+                    .HasConstraintName("FK_StudentChatRooms_Student");
+
+                entity.HasOne(scr => scr.ChatRoom)
+                   .WithMany(cr => cr.StudentChatRooms)
+                   .HasForeignKey(e => e.ChatRoomId)
+                   .HasConstraintName("FK_StudentChatRoom_ChatRoom");
+
+            });
         }
     }
 }

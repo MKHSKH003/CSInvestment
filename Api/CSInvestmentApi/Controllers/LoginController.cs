@@ -10,7 +10,7 @@ using CSInvestmentApi.Entities;
 
 namespace CSInvestmentApi.Controllers
 {
-    [Route("api/user-login")]
+    [Route("api/authentication")]
     public class LoginController : Controller
     {
         private readonly ILoginService _loginService;
@@ -19,8 +19,8 @@ namespace CSInvestmentApi.Controllers
             _loginService = loginService;
         }
 
-        [HttpGet("authentication")]
-        public Students Authentication([FromQuery] string username, [FromQuery] string password)
+        [HttpGet("authenticate-user")]
+        public Student Authentication([FromQuery] string username, [FromQuery] string password)
         {
             return _loginService.Authentication(username , password);
         }

@@ -1,8 +1,13 @@
 
-
-export const addUserDevice = (pushNotificationsBaseUrl, userId, username, deviceToken) =>
+export const getUserDevices = (pushNotificationsBaseUrl) =>
 {
-    return fetch(pushNotificationsBaseUrl+`store-user-device?userId=${userId}&username=${username}&deviceToken=${deviceToken}`)
+    return fetch(pushNotificationsBaseUrl+`device-tokens`)
+           .then(response =>{return response.json()});
+};
+
+export const addUserDevice = (pushNotificationsBaseUrl, userId, deviceToken) =>
+{
+    return fetch(pushNotificationsBaseUrl+`store-user-device?userId=${userId}&deviceToken=${deviceToken}`)
            .then(response =>{return response.json()});
 };
 

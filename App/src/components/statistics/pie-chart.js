@@ -15,7 +15,7 @@ class PieChartWithCenteredLabels extends React.PureComponent {
         const data = [
             {
                 key: 1,
-                amount: students.filter(function(x){return x.isAdmin!=1}).length,
+                amount: students.filter(function(x){return x.IsAdmin!=1}).length,
                 svg: { fill: '#1abc9c' },
             },
             {

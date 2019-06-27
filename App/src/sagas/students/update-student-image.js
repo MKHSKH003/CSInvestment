@@ -6,7 +6,7 @@ import { ToastActionsCreators } from 'react-native-redux-toast';
 
 import {
   UPDATE_IMAGE_REQUEST,
-  loadStudentsSuccess,
+  updateImageSuccess
 } from '../../actions/studentsActions';
 
 import {studentsApi} from '../../api';
@@ -15,15 +15,9 @@ import { studentsBaseUrl } from "../../constants/api-selectors.js";
 export function* updateStudentImage(action) {
   try 
   {
-      const students = yield call(studentsApi.updateStudentImage, studentsBaseUrl, action.id, action.image, action.username);
-      if(students.item1==undefined){throw Error;}
-      if(students.item2=="Success")
-      {
-        yield put(ToastActionsCreators.displaySuccess('Student image updated successfully!', 5000));
-        yield put(loadStudentsSuccess(students.item1));
-      }
-      else
-        yield put(ToastActionsCreators.displayError('Failed, '+students.item2, 2000));
+    yield call(studentsApi.updateStudentImage, studentsBaseUrl, action.id, action.image, action.username);
+    yield put(ToastActionsCreators.displaySuccess('Student image updated successfully!', 5000));
+    yield put(updateImageSuccess(action.id, action.image));
   }
   catch(e)
   {

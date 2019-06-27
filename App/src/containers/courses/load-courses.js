@@ -6,9 +6,8 @@ import { ToastActionsCreators } from 'react-native-redux-toast';
 export const mapStateToProps = (state) => {
     return {
         courses: state.loadCoursesReducer.courses,
-        studentCourses: state.loadStudentCoursesReducer.studentCourses,
         currentUser: state.loginReducer.student,
-        chatRoomMessages: state.loadMessagesReducer.messages,
+        devices: state.pushNotificationsReducer.devices
     };
 };
 

@@ -1,24 +1,22 @@
-﻿ using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using CSInvestmentApi.Entities;
 
 namespace CSInvestmentApi.Services
 {
     public class LoginService : ILoginService
     {
-        private readonly Entities.Context _ticketSystemDbContext;
+        private readonly Context _ticketSystemDbContext;
         private readonly IStatisticsService _statisticsService;
 
-        public LoginService(Entities.Context ticketSystemDbContext, IStatisticsService statisticsService)
+        public LoginService(Context ticketSystemDbContext, IStatisticsService statisticsService)
         {
             _ticketSystemDbContext = ticketSystemDbContext;
             _statisticsService = statisticsService;
         }
 
-        public Students Authentication(string username, string password)
+        public Student Authentication(string username, string password)
         {
-            var entry = _ticketSystemDbContext.Students.SingleOrDefault(user => user.Name == username && user.Password == password);
+            var entry = _ticketSystemDbContext.Student.SingleOrDefault(user => user.Name == username && user.Password == password);
 
             if (entry !=null)
             {

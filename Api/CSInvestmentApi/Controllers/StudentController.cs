@@ -18,7 +18,7 @@ namespace CSInvestmentApi.Controllers
         }
 
         [HttpGet("get-students")]
-        public IEnumerable<Students> Get()
+        public IEnumerable<Student> Get()
         {
             return _studentService.Get();
         }
@@ -30,33 +30,38 @@ namespace CSInvestmentApi.Controllers
         }
 
         [HttpGet("update-payment-status")]
-        public IEnumerable<Students> UpdateStudentPaymentStatus([FromQuery] int id, [FromQuery] string username)
+        public ActionResult UpdateStudentPaymentStatus([FromQuery] int id, [FromQuery] string username)
         {
-            return _studentService.UpdatePaymentStatus(id, username);
+            _studentService.UpdatePaymentStatus(id, username);
+            return Json(new { Message = "Success" });
         }
 
         [HttpGet("update-password")]
-        public (IEnumerable<Students>, string error) UpdatePassword([FromQuery] int id, [FromQuery] string password)
+        public ActionResult UpdatePassword([FromQuery] int id, [FromQuery] string password)
         {
-            return _studentService.UpdatePassword(id, password);
+            _studentService.UpdatePassword(id, password);
+            return Json(new { Message = "Success" });
         }
 
         [HttpPost("update-student-image")]
-        public (IEnumerable<Students>, string error) UpdateStudentImage([FromBody] string image, [FromQuery] int id, [FromQuery] string username)
+        public ActionResult UpdateStudentImage([FromBody] string image, [FromQuery] int id, [FromQuery] string username)
         {
-            return _studentService.UpdateStudentImage(id, image, username);
+            _studentService.UpdateStudentImage(id, image, username);
+            return Json(new { Message = "Success" });
         }
 
         [HttpGet("delete-student")]
-        public IEnumerable<Students> DeleteStudent([FromQuery] int id, [FromQuery] string username)
+        public ActionResult DeleteStudent([FromQuery] int id, [FromQuery] string username)
         {
-            return _studentService.Delete(id, username);
+            _studentService.Delete(id, username);
+            return Json(new { Message = "Success" });
         }
 
         [HttpPost("add-courses")]
-        public IEnumerable<Students> AddCousers([FromQuery] int id, [FromBody] Course[] courses, [FromQuery] string username)
+        public ActionResult AddCousers([FromQuery] int id, [FromBody] Models.ValuePair[] courses, [FromQuery] string username)
         {
-            return _studentService.AddCourses(id, courses, username);
+            _studentService.AddStudentCourse(id, courses, username);
+            return Json(new { Message = "Success" });
         }
 
         

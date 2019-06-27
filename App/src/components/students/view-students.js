@@ -6,7 +6,6 @@ import {
 import ImageLoad from 'react-native-image-placeholder';
 
 import Header from '../../containers/header/header.js';
-import LoadingStudents from '../../containers/students/loading-students';
 import UpdateStudent from './update-student.js';
 import UpdateSettings from './update-settings.js';
 
@@ -17,7 +16,10 @@ export default class Students extends Component {
     this.state = {
       modalVisible:false,
       settingsVisible:false,
-      itemSelected:[],
+      itemSelected: 
+        {
+           StudentCourses: []
+        },
     };
 
     this.setModalVisible = this.setModalVisible.bind(this);
@@ -45,16 +47,14 @@ export default class Students extends Component {
   render() {
       const {students, updatePassword, addCourses, updatePaymentStatus, deleteStudent, updateImage, student} = this.props;
       const imagePlaceHolder = 'https://i.stack.imgur.com/l60Hf.png';
-      //const student = {'id':36, 'name':'skhumbuzo','isAdmin':1} 
     return (
       <ScrollView>
       <Header props={this.props} />
-      <LoadingStudents />
       <View style={styles.container}>
         <FlatList style={styles.list}
-          data={students? students.reverse():null}
+          data={students}
           keyExtractor= {(item) => {
-            return item.id.toString();
+            return item.Id+"";
           }}
           ItemSeparatorComponent={() => {
             return (
@@ -66,7 +66,7 @@ export default class Students extends Component {
             return (
               <View style={styles.card}>
                 <UpdateStudent
-                      username={student.name}
+                      username={student.Name}
                       deleteStudent={deleteStudent} 
                       addCourses={addCourses} 
                       updatePaymentStatus={updatePaymentStatus} 
@@ -75,39 +75,38 @@ export default class Students extends Component {
                       modalVisible={this.state.modalVisible}
                       updateImage = {updateImage}
                  />
-
                  <UpdateSettings
-                      username={student.name}
+                      username={student.Name}
                       updatePassword={updatePassword} 
                       item={this.state.itemSelected}  
                       setModalVisible={this.setSettingsVisible} 
                       modalVisible={this.state.settingsVisible}
                       updateImage = {updateImage}
                  />
-                {item.isAdmin != 1 &&
-                <TouchableOpacity onPress={()=>this.openModal(student.name, item.name, student.isAdmin, item)}> 
+                {item.IsAdmin != 1 &&
+                <TouchableOpacity onPress={()=>this.openModal(student.Name, item.Name, student.IsAdmin, item)}> 
                 <ImageLoad
                       borderRadius={100}
                       resizeMode={'stretch'}
                       style={styles.cardImage}
                       loadingStyle={{ size: 'large', color: 'green' }}
-                      source={{uri:item.image? item.image : imagePlaceHolder }}
+                      source={{uri:item.Image? item.Image : imagePlaceHolder }}
                   />
 
                 <View style={styles.cardHeader}>
                   <View>
-                    <Text style={styles.title}>{item.name}</Text>
-                    {student.isAdmin == 1 && item.cell!='' &&
-                    <Text style={styles.description}>Cell : {item.cell}</Text>
+                    <Text style={styles.title}>{item.Name}</Text>
+                    {student.IsAdmin == 1 && item.Cell!='' &&
+                    <Text style={styles.description}>Cell : {item.Cell}</Text>
                     }
-                    {item.location!='' &&
-                    <Text style={styles.description}>Location : {item.location}</Text>
+                    {item.Location!='' &&
+                    <Text style={styles.description}>Location : {item.Location}</Text>
                     }
-                    {item.courses!=='' && item.isAdmin != 1 &&
-                    <Text style={styles.description}>Course(s) : {item.courses}</Text>
+                    {item.StudentCourses.length!=0 && student.IsAdmin == 1 &&
+                    <Text style={styles.description}>{item.StudentCourses.length > 1 ? 'Courses: ' : 'Course: '} {item.StudentCourses.map( sc => sc.Course.Name+" ")}</Text>
                     }
-                    {student.isAdmin == 1 && item.paymentStatus !='' &&
-                    <Text style={styles.time}>Status: {item.paymentStatus}</Text>
+                    {student.IsAdmin == 1 && item.PaymentStatus !='' &&
+                    <Text style={styles.time}>Status: {item.PaymentStatus}</Text>
                     }
                   </View>
                 </View>

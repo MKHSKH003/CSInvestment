@@ -12,7 +12,6 @@ import {
 } from 'react-native';
 
 import Header from '../../containers/header/header.js';
-import LoadingCourses from '../../containers/courses/loading-courses'
 import UpdateSchedule from './update-schedule';
 import Dimensions from 'Dimensions';
 
@@ -33,16 +32,15 @@ export default class ViewCourses extends Component {
     this.setState({updateScheduleVisible: visible})
   }
   render() {
-    const {courses, studentCourses, chatRoomMessages, currentUser, updateSchedule, sendInfo} = this.props;
+    const {devices, courses, currentUser, updateSchedule, sendInfo} = this.props;
     return (
       <ScrollView>
       <Header props={this.props} /> 
-      <LoadingCourses />
       <View style={styles.container}>
         <FlatList style={styles.list}
           data={courses}
           keyExtractor= {(item) => {
-            return item.id+"";
+            return item.Id+"";
           }}
           ItemSeparatorComponent={() => {
             return (
@@ -59,18 +57,19 @@ export default class ViewCourses extends Component {
                 updateScheduleVisible={this.state.updateScheduleVisible}
                 updateSchedule={updateSchedule}
                 username={currentUser.name}
+                devices={devices}
               />
-              <TouchableOpacity style={styles.card} onPress={()=>this.props.currentUser.isAdmin == 1? this.setState({updateScheduleVisible: true, courseSelected:item}) : sendInfo('You cannot update course schedule')}>
-                <Image style={styles.cardImage} source={{uri:item.image}}/>
+              <TouchableOpacity style={styles.card} onPress={()=>this.props.currentUser.IsAdmin == 1? this.setState({updateScheduleVisible: true, courseSelected:item}) : sendInfo('You cannot update course schedule')}>
+                <Image style={styles.cardImage} source={{uri:item.Image}}/>
                 <View style={styles.cardHeader}>
                   <View>
-                    <Text style={styles.name}>{item.name}</Text>
-                    <Text style={styles.description}>{item.description}</Text>
-                    <Text style={styles.time}>Venue : {item.venue}</Text>
+                    <Text style={styles.name}>{item.Name}</Text>
+                    <Text style={styles.description}>{item.Description}</Text>
+                    <Text style={styles.time}>Venue : {item.Venue}</Text>
                     <View style={styles.timeContainer}>
                       <Text style={styles.time}>Next Class : </Text>
                       <Image style={styles.iconData} source={{uri: 'https://png.icons8.com/color/96/3498db/calendar.png'}}/>
-                      <Text style={styles.time}>{item.time}</Text>
+                      <Text style={styles.time}>{item.Time}</Text>
                     </View>
                   </View>
                 </View>
@@ -79,13 +78,13 @@ export default class ViewCourses extends Component {
                     <View style={styles.socialBarSection}>
                       <TouchableOpacity style={styles.socialBarButton}>
                         <Image style={styles.icon} source={{uri: 'https://img.icons8.com/color/96/000000/gender-neutral-user.png'}}/>
-                        <Text style={styles.socialBarLabel}>{studentCourses.filter(function(studentCourse){return studentCourse.courseId==item.id}).length}</Text>
+                        <Text style={styles.socialBarLabel}>{item.StudentCourses.length}</Text>
                       </TouchableOpacity>
                     </View>
                     <View style={styles.socialBarSection}>
                       <TouchableOpacity style={styles.socialBarButton}>
                         <Image style={styles.icon} source={{uri: 'https://png.icons8.com/ios-glyphs/75/2ecc71/comments.png'}}/>
-                        <Text style={styles.socialBarLabel}>{chatRoomMessages.filter(function(chatRoomMessages){return chatRoomMessages.chatRoomId==item.chatRoomId}).length}</Text>
+                        <Text style={styles.socialBarLabel}>{item.ChatRoom.Messages.length}</Text>
                       </TouchableOpacity>
                     </View>
                   </View>

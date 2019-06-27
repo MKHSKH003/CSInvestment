@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using CSInvestmentApi.Model;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using CSInvestmentApi.Services;
 using CSInvestmentApi.Entities;
-using CSInvestmentApi.Models;
+using System.Collections.Generic;
 
 namespace CSInvestmentApi.Controllers
 {
@@ -19,8 +14,8 @@ namespace CSInvestmentApi.Controllers
             _chatRooms = chatRooms;
         }
 
-        [HttpGet("get-groups")]
-        public IEnumerable<Groups> Get()
+        [HttpGet("get-chat-rooms")]
+        public IEnumerable<ChatRoom> Get()
         {
             return _chatRooms.Get();
         }

@@ -6,7 +6,7 @@ import { ToastActionsCreators } from 'react-native-redux-toast';
 
 import {
   UPDATE_SCHEDULE_REQUEST,
-  loadCoursesSuccess,
+  updateScheduleSuccess,
 } from '../../actions/coursesActions';
 
 import {coursesApi} from '../../api';
@@ -15,10 +15,9 @@ import { coursesBaseUrl } from "../../constants/api-selectors.js";
 export function* updateSchedule(action) {
   try 
   {   
-      const courses = yield call(coursesApi.updateSchedule, coursesBaseUrl, action.id, action.date, action.venue, action.username);
-      if(courses==undefined){throw Error;}
+      yield call(coursesApi.updateSchedule, coursesBaseUrl, action.id, action.date, action.venue, action.username);
       yield put(ToastActionsCreators.displaySuccess('Schedule updated successfully!', 5000));
-      yield put(loadCoursesSuccess(courses));
+      yield put(updateScheduleSuccess(action.id, action.date, action.venue));
   }
   catch(e)
   {

@@ -26,8 +26,8 @@ export default class Groups extends Component {
   }
 
   openGroup(Group){
-   this.props.loadMessages(Group.id); 
-   Actions.chatroom({color:"white",title:Group.name, id:Group.id})
+   //this.props.loadMessages(Group.id); 
+   Actions.chatroom({color:"white",title:Group.name, id:Group.id, messages: Group.Messages})
   }
   renderGroupMembers (group){
     const imagePlaceHolder = 'https://i.stack.imgur.com/l60Hf.png';
@@ -47,6 +47,7 @@ export default class Groups extends Component {
 
   render() {
       const {groups, loading, loadMessages, currentUser, sendInfo} = this.props
+      console.log('chat - roons', groups)
     return (
       <ScrollView>
       <Header props={this.props} />
@@ -70,7 +71,7 @@ export default class Groups extends Component {
             mainContentStyle = styles.mainContent;
           }
           return(
-            <TouchableOpacity onPress={()=>{ currentUser.courses.includes(Group.name) || currentUser.isAdmin == 1? this.openGroup(Group) : sendInfo("Access Denied")}}>
+            <TouchableOpacity onPress={()=>{ Group.StudentChatRooms.filter( scr => scr.StudentId == currentUser.Id).length > 0 || currentUser.IsAdmin == 1 ? this.openGroup(Group) : sendInfo("Access Denied")}}>
             <View style={styles.container}>
               <Image source={{uri:Group.image}} style={styles.avatar}/>
               <View style={styles.content}>
@@ -79,7 +80,7 @@ export default class Groups extends Component {
                     <Text style={styles.groupName}>{Group.name}</Text>
                   </View>
                   <Text style={styles.countMembers}>
-                    {Group.counter==1? Group.counter+ ' member' : Group.counter+' members'}
+                    {Group.StudentChatRooms.counter==1? Group.StudentChatRooms.counter+ ' member' : Group.StudentChatRooms.counter+' members'}
                   </Text>
                   <Text style={styles.timeAgo}>
                     Keep up to date

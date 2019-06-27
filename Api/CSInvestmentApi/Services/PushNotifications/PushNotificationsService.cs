@@ -16,30 +16,33 @@ namespace CSInvestmentApi.Services
             _ticketSystemDbContext = ticketSystemDbContext;
         }
 
-        public IEnumerable<PushNotifications> Get()
+        public IEnumerable<DeviceToken> Get()
         {
-            return _ticketSystemDbContext.PushNotifications.Select(pushNotifications => PushNotificationsConveter.ConvertPushNotificationsToEntityModel(pushNotifications));
+            return _ticketSystemDbContext.DeviceToken;
         }
 
-        public IEnumerable<PushNotifications> StoreUserDevice(int userId, string username, string deviceToken)
+        public void StoreUserDevice(int userId, string deviceToken)
         {
-            PushNotifications checkIfExists = _ticketSystemDbContext.PushNotifications.SingleOrDefault(record => record.Username.Trim().ToLower() == username.Trim().ToLower());
-            if (checkIfExists == null)
+            DeviceToken userDeviceToken = _ticketSystemDbContext.DeviceToken.SingleOrDefault(record => record.StudentId == userId);
+            if (userDeviceToken == null && deviceToken!= "undefined" )
             {
-                _ticketSystemDbContext.PushNotifications.Add(new PushNotifications()
+                userDeviceToken = new DeviceToken()
                 {
-                    UserId = userId,
-                    Username = username,
-                    DeviceToken = deviceToken
-                });
+                    StudentId = userId,
+                    UserDeviceToken = deviceToken
+                };
+                _ticketSystemDbContext.DeviceToken.Add(userDeviceToken);
+
             }
-            else if (checkIfExists.DeviceToken != deviceToken)
+            else if (userDeviceToken != null)
             {
-                checkIfExists.DeviceToken = deviceToken;
-                _ticketSystemDbContext.PushNotifications.Update(checkIfExists);
+                if (userDeviceToken.UserDeviceToken != deviceToken)
+                {
+                    userDeviceToken.UserDeviceToken = deviceToken;
+                    _ticketSystemDbContext.DeviceToken.Update(userDeviceToken);
+                }
             }
             _ticketSystemDbContext.SaveChanges();
-            return Get();
         }
     }
 }

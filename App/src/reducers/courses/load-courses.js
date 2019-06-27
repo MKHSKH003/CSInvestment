@@ -2,7 +2,8 @@ import {
  LOAD_COURSES_REQUEST,
  LOAD_COURSES_SUCCESS,
  LOAD_COURSES_FAILURE,
- LOAD_COURSES_SYSTEM_DATA_REQUEST
+ 
+ UPDATE_SCHEDULE_SUCCESS
 } from '../../actions/coursesActions'
 
 export const initialState = {
@@ -15,13 +16,6 @@ export const initialState = {
 
 const loadCoursesReducer = (state = initialState, action) => {
   switch (action.type) {
-    case LOAD_COURSES_SYSTEM_DATA_REQUEST:{
-        return { ...state,
-                status:{
-                    loading:true
-                 }
-        };
-     }
      case LOAD_COURSES_REQUEST:{
         return { ...state,
                 status:{
@@ -44,6 +38,21 @@ const loadCoursesReducer = (state = initialState, action) => {
                  }
             };
      }
+     case UPDATE_SCHEDULE_SUCCESS: {
+      return {
+         ...state,
+         courses: state.courses.map(c => (
+            c.Id == action.id ? {
+               ...c,
+               Time: action.date == 'none' ? c.Time : action.date,
+               Venue: action.venue == 'none' ? c.Venu : action.venue
+            } : c
+         )),
+         status: {
+            loading: false
+         }
+      };
+   }
      default:
         return state;
    }

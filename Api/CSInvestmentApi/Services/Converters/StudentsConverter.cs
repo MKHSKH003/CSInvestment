@@ -8,9 +8,9 @@ namespace CSInvestmentApi.Converters
     public class StudentsConveter
     {
 
-        public static Students ConvertStudentToEntityModel(Students student)
+        public static Models.Student ConvertToModel(Student student)
         {
-            return new Students()
+            return new Models.Student()
             {
                 Id =student.Id,
                 Name= student.Name,
@@ -19,7 +19,6 @@ namespace CSInvestmentApi.Converters
                 Location= student.Location,
                 PaymentStatus= student.PaymentStatus,
                 Image= student.Image,
-                Courses = student.Courses,
                 IsAdmin = student.IsAdmin
             };
         }

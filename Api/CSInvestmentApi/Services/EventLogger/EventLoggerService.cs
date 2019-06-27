@@ -18,11 +18,11 @@ namespace CSInvestmentApi.Services
         {
             if (key == "new-student")
             {
-                _ticketSystemDbContext.ChatRoomMessages.Add(new ChatRoomMessages()
+                _ticketSystemDbContext.Message.Add(new Message()
                 {
-                    Username = "Event Logger",
+                    //Username = "Event Logger",
                     ChatRoomId = 1,
-                    Message = username + " has added a new student",
+                    UserMessage = username + " has added a new student",
                     Date = DateTime.Now.ToShortTimeString()
                 });
                 _ticketSystemDbContext.SaveChanges();
@@ -30,11 +30,11 @@ namespace CSInvestmentApi.Services
 
             else if (key == "update-payment-status")
             {
-                _ticketSystemDbContext.ChatRoomMessages.Add(new ChatRoomMessages()
+                _ticketSystemDbContext.Message.Add(new Message()
                 {
-                    Username = "Event Logger",
+                    //Username = "Event Logger",
                     ChatRoomId = 1,
-                    Message = username + " has updated a student payment status",
+                    UserMessage = username + " has updated a student payment status",
                     Date = DateTime.Now.ToShortTimeString()
                 });
                 _ticketSystemDbContext.SaveChanges();
@@ -42,11 +42,11 @@ namespace CSInvestmentApi.Services
 
             else if (key == "delete-student")
             {
-                _ticketSystemDbContext.ChatRoomMessages.Add(new ChatRoomMessages()
+                _ticketSystemDbContext.Message.Add(new Message()
                 {
-                    Username = "Event Logger",
+                    //Username = "Event Logger",
                     ChatRoomId = 1,
-                    Message = username + " has delete a student record",
+                    UserMessage = username + " has delete a student record",
                     Date = DateTime.Now.ToShortTimeString()
                 });
                 _ticketSystemDbContext.SaveChanges();
@@ -54,11 +54,11 @@ namespace CSInvestmentApi.Services
 
             else if (key == "update-student-courses")
             {
-                _ticketSystemDbContext.ChatRoomMessages.Add(new ChatRoomMessages()
+                _ticketSystemDbContext.Message.Add(new Message()
                 {
-                    Username = "Event Logger",
+                    //Username = "Event Logger",
                     ChatRoomId = 1,
-                    Message = username + " has updated a student courses",
+                    UserMessage = username + " has updated a student courses",
                     Date = DateTime.Now.ToShortTimeString()
                 });
                 _ticketSystemDbContext.SaveChanges();

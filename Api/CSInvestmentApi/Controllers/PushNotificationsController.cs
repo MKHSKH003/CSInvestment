@@ -14,10 +14,17 @@ namespace CSInvestmentApi.Controllers
             _pushNotificationsService = pushNotificationsService;
         }
 
-        [HttpGet("store-user-device")]
-        public IEnumerable<PushNotifications> StoreUserDevice(int userId, string username, string deviceToken)
+        [HttpGet("device-tokens")]
+        public IEnumerable<DeviceToken> Get()
         {
-            return _pushNotificationsService.StoreUserDevice(userId, username, deviceToken);
+            return _pushNotificationsService.Get();
+        }
+
+        [HttpGet("store-user-device")]
+        public ActionResult StoreUserDevice(int userId, string deviceToken)
+        {
+            _pushNotificationsService.StoreUserDevice(userId, deviceToken);
+            return Json(new { Message = "Success" });
         }
     }
 }

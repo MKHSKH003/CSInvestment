@@ -4,7 +4,6 @@ import {sendMessageRequest} from '../../actions/chatMessagesActions'
 
 export const mapStateToProps = (state) => {
     return {
-        messages: state.loadMessagesReducer.messages,
         loading: state.loadMessagesReducer.status.loading,
         username: state.loginReducer.username,
     };

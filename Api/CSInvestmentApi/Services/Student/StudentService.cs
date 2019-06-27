@@ -4,8 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Mail;
 using System.Text;
-using System.Threading.Tasks;
-using CSInvestmentApi.Converters;
+using Microsoft.EntityFrameworkCore;
 using CSInvestmentApi.Entities;
 using CSInvestmentApi.Model;
 using Microsoft.Extensions.Options;
@@ -25,71 +24,51 @@ namespace CSInvestmentApi.Services
             _environmentConfig = environmentConfig.Value;
         }
 
-        public IEnumerable<Students> Get()
+        public IEnumerable<Student> Get()
         {
-            return _ticketSystemDbContext.Students.Select(student => StudentsConveter.ConvertStudentToEntityModel(student));
+            return _ticketSystemDbContext.Student
+                .Include(s => s.StudentCourses)
+                    .ThenInclude(sc => sc.Course);
         }
 
 
-        public (IEnumerable<Students>, string error) UpdateStudentImage(int id, string image, string username)
+        public void UpdateStudentImage(int id, string image, string username)
         {
-            if (checkUrl(image))
-            {
-                var student = _ticketSystemDbContext.Students.Find(id);
-                student.Image = image;
-                _ticketSystemDbContext.Students.Update(student);
-                _ticketSystemDbContext.SaveChanges();
-
-                return (Get(), "Success");
-            }
-            else
-            {
-                return (Get(), "Invalid image URL");
-            }
+            var student = _ticketSystemDbContext.Student.Find(id);
+            student.Image = image;
+            _ticketSystemDbContext.Student.Update(student);
+            _ticketSystemDbContext.SaveChanges();
         }
 
-        public (IEnumerable<Students>, string error) UpdatePassword(int id, string password)
+        public void UpdatePassword(int id, string password)
         {
-            if (password.Length>0)
-            {
-                var user =_ticketSystemDbContext.Students.Find(id);
-                user.Password = password;
-                _ticketSystemDbContext.Students.Update(user);
-                _ticketSystemDbContext.SaveChanges();
-
-                return (Get(), "Success");
-            }
-            else
-            {
-                return (Get(), "Invalid password");
-            }
+            var user =_ticketSystemDbContext.Student.Find(id);
+            user.Password = password;
+            _ticketSystemDbContext.Student.Update(user);
+            _ticketSystemDbContext.SaveChanges();
         }
 
-        public IEnumerable<Students> UpdatePaymentStatus(int id, string username)
+        public void UpdatePaymentStatus(int id, string username)
         {
             _eventLoggerService.LogEvent(username, "update-payment-status");
-            var student = _ticketSystemDbContext.Students.Find(id);
+            var student = _ticketSystemDbContext.Student.Find(id);
             student.PaymentStatus = "Paid";
-            _ticketSystemDbContext.Students.Update(student);
+            _ticketSystemDbContext.Student.Update(student);
             _ticketSystemDbContext.SaveChanges();
-
-            return Get();
         }
 
-        public IEnumerable<Students> Delete(int id, string username)
+        public void Delete(int id, string username)
         {
             _eventLoggerService.LogEvent(username, "delete-student");
-            var student = _ticketSystemDbContext.Students.Find(id);
-            _ticketSystemDbContext.Students.Remove(student);
+            var student = _ticketSystemDbContext.Student.Find(id);
+            _ticketSystemDbContext.Student.Remove(student);
             _ticketSystemDbContext.SaveChanges();
-
-            return Get();
         }
 
         public string addStudent(string name, string cell, string email, string location, string isAdmin, string createdBy)
         {
             string results = CheckEntries(name, cell, email, location, isAdmin);
-            Students checkIfExists = _ticketSystemDbContext.Students.SingleOrDefault(student => student.Name.Trim().ToLower() == name.Trim().ToLower());
+            Student checkIfExists = _ticketSystemDbContext.Student.SingleOrDefault(student => student.Name.Trim().ToLower() == name.Trim().ToLower());
             if (checkIfExists != null)
             {
                 results = "another name, username already exists!";
@@ -99,14 +78,13 @@ namespace CSInvestmentApi.Services
                 SendConfirmationEmail( name, email);
                 _eventLoggerService.LogEvent(createdBy, "new-student");
 
-                _ticketSystemDbContext.Students.Add(new Students()
+                _ticketSystemDbContext.Student.Add(new Student()
                 {
                     Name = name.Trim(),
                     Cell = cell == null? cell : "",
                     Email = email,
                     Location = location,
                     PaymentStatus =  isAdmin == "Yes" ? "" : "Unpaid",
-                    Courses="",
                     Image = "",
                     Password = "csinvestment@2019",
                     IsAdmin = isAdmin == "Yes" ? 1 : 0
@@ -116,44 +94,29 @@ namespace CSInvestmentApi.Services
             return results;
         }
 
-        public IEnumerable<Students> AddCourses(int id, Course[] courses, string editedBy)
+        public void AddStudentCourse(int id, Models.ValuePair[] courses, string editedBy)
         {
-            DeleteStudentCourseRecords(id);
-            string _courses = "";
-            _eventLoggerService.LogEvent(editedBy, "update-student-courses");
-            foreach (Course course in courses)
+            List<StudentCourse> studentCourse = _ticketSystemDbContext.StudentCourse.ToList();
+            foreach (Models.ValuePair pair in courses)
             {
-                if (_courses != "") { _courses += ","; }
-                int courseId = _ticketSystemDbContext.Courses.SingleOrDefault(_course => _course.Name ==course.value).Id;
-                _courses += _ticketSystemDbContext.Courses.SingleOrDefault(_course => _course.Name == course.label).Name;
-                _ticketSystemDbContext.StudentCourses.Add(new StudentCourses()
+                var a = studentCourse.SingleOrDefault(sc => sc.StudentId == id && sc.CourseId == pair.value);
+                if  (a == null)
                 {
-                    CourseId=courseId,
-                    StudentId=id
-                });
-            }
-
-            var student = _ticketSystemDbContext.Students.Find(id);
-            student.Courses = _courses;
-
-            _ticketSystemDbContext.SaveChanges(); 
-            return Get();
-        }
-
-        public void DeleteStudentCourseRecords(int id)
-        {
-            IEnumerable<StudentCourses> studentCourses = _ticketSystemDbContext.StudentCourses.Select(studentCourse => CoursesConveter.ConvertStudentCourseToEntityModel(studentCourse));
-            foreach(StudentCourses studentCourse in studentCourses)
-            {
-                if(studentCourse.StudentId == id)
-                {
-                    var _studentCourse = _ticketSystemDbContext.StudentCourses.Find(studentCourse.Id);
-                    _ticketSystemDbContext.StudentCourses.Remove(_studentCourse);
+                    _ticketSystemDbContext.StudentCourse.Add(new StudentCourse()
+                    {
+                        CourseId = pair.value,
+                        StudentId = id
+                    });
                 }
             }
-            var student = _ticketSystemDbContext.Students.Find(id);
-            student.Courses = "";
-            _ticketSystemDbContext.Students.Update(student);
+            _ticketSystemDbContext.SaveChanges();
+        }
+
+        public void DeleteStudentCourseRecords(int StudentCourseId)
+        {
+            var _studentCourse = _ticketSystemDbContext.StudentCourse.Find(StudentCourseId);
+            _ticketSystemDbContext.StudentCourse.Remove(_studentCourse);
+
             _ticketSystemDbContext.SaveChanges();
         }
 

@@ -24,21 +24,21 @@ namespace CSInvestmentApi.Controllers
         }
 
         [HttpGet("get-market-updates")]
-        public IEnumerable<MarketUpdates> Get()
+        public IEnumerable<Post> Get()
         {
             return _marketUpdatesService.Get();
         }
 
         [HttpPost("post-market-update")]
-        public IEnumerable<MarketUpdates> Post([FromBody] string url, [FromQuery] string caption)
+        public Post Post([FromBody] string url, [FromQuery] string caption)
         {
             return _marketUpdatesService.Post(url, caption);
         }
 
         [HttpGet("delete-market-update")]
-        public IEnumerable<MarketUpdates> Delete([FromQuery] int id)
+        public void Delete([FromQuery] int id)
         {
-            return _marketUpdatesService.Delete(id);
+            _marketUpdatesService.Delete(id);
         }
 
     }

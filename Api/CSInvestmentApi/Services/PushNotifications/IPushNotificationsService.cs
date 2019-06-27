@@ -8,7 +8,7 @@ namespace CSInvestmentApi.Services
 {
     public interface IPushNotificationsService
     {
-        IEnumerable<PushNotifications> StoreUserDevice(int userId, string username, string deviceToken);
-        IEnumerable<PushNotifications> Get();
+        void StoreUserDevice(int userId, string deviceToken);
+        IEnumerable<DeviceToken> Get();
     }
 }

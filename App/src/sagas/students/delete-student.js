@@ -6,7 +6,7 @@ import { ToastActionsCreators } from 'react-native-redux-toast';
 
 import {
   DELETE_REQUEST,
-  loadStudentsSuccess,
+  deleteSuccess,
 } from '../../actions/studentsActions';
 
 import {studentsApi} from '../../api';
@@ -15,10 +15,9 @@ import { studentsBaseUrl } from "../../constants/api-selectors.js";
 export function* deleteStudent(action) {
   try 
   {   
-      const students = yield call(studentsApi.deleteStudent,studentsBaseUrl,action.id, action.username);
-      if(students==undefined){throw Error;}
+      yield call(studentsApi.deleteStudent,studentsBaseUrl,action.id, action.username);
       yield put(ToastActionsCreators.displaySuccess('Student deleted successfully!', 5000));
-      yield put(loadStudentsSuccess(students));
+      yield put(deleteSuccess(action.id));
   }
   catch(e)
   {

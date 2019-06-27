@@ -12,9 +12,9 @@ import ImageLoad from 'react-native-image-placeholder';
 
 import appsettings from '../../../app.json';
 const courses = [
-  { label: 'Beginner', value: 'beginner' },
-  { label: 'Intermediate', value: 'intermediate' },
-  { label: 'Advanced', value: 'advanced' }
+  { label: 'Beginner', value: 1 },
+  { label: 'Intermediate', value: 2 },
+  { label: 'Advanced', value: 3 }
 ]
 
 export default class UpdateStudent extends Component {
@@ -36,6 +36,7 @@ export default class UpdateStudent extends Component {
   addCourses(id, username){
     this.props.addCourses(id, this.state.selectedCourses, username)
     this.props.setModalVisible(false)
+    this.setState({selectedCourses: []})
   }
   submit(id, username){
      this.props.addCourses(id, this.state.selectedCourses, username);
@@ -103,8 +104,7 @@ export default class UpdateStudent extends Component {
     const imagePlaceHolder = 'https://img.icons8.com/ios/48/000000/gender-neutral-user.png';
     return (
         <Modal
-          animationType={'fade'}
-          transparent={false}
+
           onRequestClose={() => setModalVisible(false)}
           visible={modalVisible}>
 
@@ -112,20 +112,22 @@ export default class UpdateStudent extends Component {
             <View style={styles.popup}>
               <View style={styles.popupContent}>
                 <ScrollView contentContainerStyle={styles.modalInfo}>
-                    <TouchableOpacity onPress={()=>this._pickImage(item.id, username) } >
+                    <TouchableOpacity onPress={()=>this._pickImage(item.Id, username) } >
                      <ImageLoad
                       style={styles.image} 
                       loadingStyle={{ size: 'small', color: 'green' }}
-                      source={{uri:item.image? item.image : imagePlaceHolder }}
+                      source={{uri:item.Image? item.Image : imagePlaceHolder }}
                      />
                     </TouchableOpacity>
-                    <Text style={styles.name}>{item.name}</Text>
-                    {item.courses!=='' &&
-                    <Text style={styles.position}>{'Course(s): '+item.courses}</Text>
+                    <Text style={styles.name}>{item.Name}</Text>
+                    {item.StudentCourses.length !=0  &&
+                    <Text style={styles.position}>{item.StudentCourses.length > 1 ? 'Courses: ' : 'Course: '}{item.StudentCourses.map( sc => sc.Course.Name+" ")}</Text>
                     }
-                     <Text style={styles.position}>{'Location: '+item.location}</Text>
-                    {item.paymentStatus !='' &&
-                    <Text style={styles.position}>{'Payment Status: '+item.paymentStatus}</Text>
+                    {item.Location!='' &&
+                    <Text style={styles.description}>Location : {item.Location}</Text>
+                    }
+                    {item.PaymentStatus !='' &&
+                    <Text style={styles.position}>{'Payment Status: '+item.PaymentStatus}</Text>
                     }
                     <TouchableOpacity>
                     <View style={{ marginLeft:20, marginRight:20, marginBottom:20}}>
@@ -136,7 +138,7 @@ export default class UpdateStudent extends Component {
                         style={{backgroundColor: '#ECF0F1',}}
                         color='green'
                         title='UPDATE PAYMENT STATUS'
-                        onPress={()=>{updatePaymentStatus(item.id, username);setModalVisible(false)}}
+                        onPress={()=>{updatePaymentStatus(item.Id, username);setModalVisible(false)}}
                     />
                     </TouchableOpacity>
                     <Button
@@ -144,7 +146,7 @@ export default class UpdateStudent extends Component {
                         style={{marginTop:20, backgroundColor: '#ECF0F1',}}
                         color='red'
                         title='DELETE STUDENT RECORD'
-                        onPress={()=>{deleteStudent(item.id, username);setModalVisible(false)}}
+                        onPress={()=>{deleteStudent(item.Id, username);setModalVisible(false)}}
                     />
                     <Text style={{marginTop:20, backgroundColor: "#ffffff"}} > SELECT COURSE(S) FOR STUDENT</Text>
                     <SelectMultiple
@@ -155,9 +157,9 @@ export default class UpdateStudent extends Component {
                 </ScrollView>
               </View>
               <View style={styles.popupButtons}>
-                <TouchableOpacity onPress={() => { this.state.selectedCourses.length && this.state.imageUrl? this.submit(item.id, username):
-                                                  !this.state.selectedCourses.length && this.state.imageUrl? this.updateImage(item.id, username):  
-                                                   this.state.selectedCourses.length &&!this.state.imageUrl? this.addCourses(item.id, username): setModalVisible(false) 
+                <TouchableOpacity onPress={() => { this.state.selectedCourses.length && this.state.imageUrl? this.submit(item.Id, username):
+                                                  !this.state.selectedCourses.length && this.state.imageUrl? this.updateImage(item.Id, username):  
+                                                   this.state.selectedCourses.length &&!this.state.imageUrl? this.addCourses(item.Id, username): setModalVisible(false) 
                                                  }} 
                                   style={styles.btnClose}>
                   <Text style={styles.txtClose}>{this.state.selectedCourses.length && this.state.imageUrl? "Submit": 

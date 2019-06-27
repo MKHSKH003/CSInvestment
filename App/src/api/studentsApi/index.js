@@ -50,10 +50,9 @@ export const deleteStudent = (studentsBaseUrl, id, username) =>{
           .catch(error => {console.log(error)
   }); 
 };
-
+  
 export const addCourses = (studentsBaseUrl, id, courses, username) =>
 {
-   console.log("API",courses);
    return fetch(studentsBaseUrl+`add-courses?id=${id}&username=${username}`,
    {
         method: 'POST', // or 'PUT'
@@ -62,7 +61,5 @@ export const addCourses = (studentsBaseUrl, id, courses, username) =>
             'Accept': 'application/json',
             'Content-Type': 'application/json'
         }
-        }).then(response => response.json())
-          .catch(error => {console.log(error)
-  }); 
+        })
 };

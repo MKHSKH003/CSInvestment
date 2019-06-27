@@ -20,21 +20,22 @@ namespace CSInvestmentApi.Controllers
         }
 
         [HttpGet("get-courses")]
-        public IEnumerable<Courses> Get()
+        public IEnumerable<Entities.Course> Get()
         {
             return _coursesService.Get();
         }
 
         [HttpGet("get-student-courses")]
-        public IEnumerable<StudentCourses> GetStudentCourses()
+        public IEnumerable<StudentCourse> GetStudentCourse()
         {
-            return _coursesService.GetStudentCourses();
+            return _coursesService.GetStudentCourse();
         }
 
         [HttpGet("update-schedule")]
-        public IEnumerable<Courses> UpdateSchedule([FromQuery] int id, [FromQuery] string date, [FromQuery] string venue, [FromQuery] string username)
+        public ActionResult UpdateSchedule([FromQuery] int id, [FromQuery] string date, [FromQuery] string venue, [FromQuery] string username)
         {
-            return _coursesService.UpdateSchedule(id, date, venue, username);
+            _coursesService.UpdateSchedule(id, date, venue, username);
+            return Json(new { Message = "Success" });
         }
 
     }

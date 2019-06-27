@@ -16,31 +16,30 @@ namespace CSInvestmentApi.Services
             _ticketSystemDbContext = ticketSystemDbContext;
         }
 
-        public IEnumerable<MarketUpdates> Get()
+        public IEnumerable<Post> Get()
         {
-            return _ticketSystemDbContext.MarketUpdates.Select(marketUpdate => MarketUpdatesConveter.ConvertMarketUpdateToEntityModel(marketUpdate));
+            return _ticketSystemDbContext.Post;
         }
 
-        public IEnumerable<MarketUpdates> Post(string url, string caption)
+        public Post Post(string url, string caption)
         {
-            _ticketSystemDbContext.MarketUpdates.Add(new MarketUpdates()
+            Post post = new Post()
             {
                 Avatar = url,
                 Caption = caption,
                 Datetime = DateTime.Now.ToString("dd-MMM-yy") + " " + DateTime.Now.ToShortTimeString()
-            });
+            };
+
+            _ticketSystemDbContext.Post.Add(post);
             _ticketSystemDbContext.SaveChanges();
 
-            return Get();
+            return post;
         }
 
-        public IEnumerable<MarketUpdates> Delete(int id)
+        public void Delete(int id)
         {
-            var marketUpdate = _ticketSystemDbContext.MarketUpdates.Find(id);
-            _ticketSystemDbContext.MarketUpdates.Remove(marketUpdate);
+            _ticketSystemDbContext.Post.Remove(_ticketSystemDbContext.Post.Find(id));
             _ticketSystemDbContext.SaveChanges();
-
-            return Get();
         }
     }
 }

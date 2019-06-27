@@ -8,8 +8,8 @@ namespace CSInvestmentApi.Services
 {
     public interface IMessagesService
     {
-        IEnumerable<ChatRoomMessages> GetMessages(int id);
-        IEnumerable<ChatRoomMessages> GetAllMessages();
-        IEnumerable<ChatRoomMessages> SendMessage(int id, string username, string message);
+        IEnumerable<Message> GetChatMessages(int id);
+        IEnumerable<Message> GetAllMessages();
+        Message SendMessage(int id, string username, string message);
     }
 }

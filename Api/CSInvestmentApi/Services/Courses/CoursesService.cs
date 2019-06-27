@@ -1,10 +1,7 @@
-﻿ using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using CSInvestmentApi.Entities;
-using CSInvestmentApi.Converters;
-using CSInvestmentApi.Models;
-using System.Net;
+using Microsoft.EntityFrameworkCore;
+using System.Linq;
 
 namespace CSInvestmentApi.Services
 {
@@ -19,29 +16,27 @@ namespace CSInvestmentApi.Services
             _eventLoggerService = eventLoggerService;
         }
 
-        public IEnumerable<Courses>  Get()
+        public IEnumerable<Course> Get()
         {
-            IEnumerable<Courses> courses=_ticketSystemDbContext.Courses.Select(course => CoursesConveter.ConvertCourseToEntityModel(course));
-
-            return courses;
+            return _ticketSystemDbContext.Course
+                .Include(c => c.ChatRoom)
+                    .ThenInclude(cr => cr.Messages)
+                .Include(c => c.StudentCourses);
         }
 
-        public IEnumerable<StudentCourses> GetStudentCourses()
+        public IEnumerable<StudentCourse> GetStudentCourse()
         {
-            IEnumerable<StudentCourses> studentCourses = _ticketSystemDbContext.StudentCourses.Select(studentCourse => CoursesConveter.ConvertStudentCourseToEntityModel(studentCourse));
-
-            return studentCourses;
+            return _ticketSystemDbContext.StudentCourse;
         }
 
-        public IEnumerable<Courses> UpdateSchedule(int id, string date, string venue, string username)
-          {
-            var course = _ticketSystemDbContext.Courses.Find(id);
+        public void UpdateSchedule(int id, string date, string venue, string username)
+        {
+            var course = _ticketSystemDbContext.Course.Find(id);
             if(date.Equals("none")) { course.Venue = venue;}
             else if (venue.Equals("none")) { course.Time = date; }
             else { course.Time = date; course.Venue = venue; };
-            _ticketSystemDbContext.Courses.Update(course);
+            _ticketSystemDbContext.Course.Update(course);
             _ticketSystemDbContext.SaveChanges();
-            return Get();
         }
 
     }

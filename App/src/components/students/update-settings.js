@@ -102,20 +102,20 @@ export default class UpdateSettings extends Component {
             <View style={styles.popup}>
               <View style={styles.popupContent}>
                 <ScrollView contentContainerStyle={styles.modalInfo}>
-                    <TouchableOpacity onPress={()=> this._pickImage(item.id, username) } >
+                    <TouchableOpacity onPress={()=> this._pickImage(item.Id, username) } >
                       <ImageLoad
                         style={styles.image} 
                         loadingStyle={{ size: 'small', color: 'green' }}
-                        source={{uri:item.image? item.image : imagePlaceHolder }}
+                        source={{uri:item.Image? item.Image : imagePlaceHolder }}
                       />
                     </TouchableOpacity>
-                    <Text style={styles.name}>{item.name}</Text>
-                    {item.courses!=='' &&
-                    <Text style={styles.position}>{'Course(s): '+item.courses}</Text>
+                    <Text style={styles.name}>{item.Name}</Text>
+                    {item.StudentCourses.length !=0  &&
+                    <Text style={styles.position}>{item.StudentCourses.length > 1 ? 'Courses: ' : 'Course: '}{item.StudentCourses.map( sc => sc.Course.Name+" ")}</Text>
                     }
-                     <Text style={styles.position}>{'Location: '+item.location}</Text>
-                    <Text style={styles.position}>{'Payment Status: '+item.paymentStatus}</Text>
-                    
+                    {item.Location!='' &&
+                    <Text style={styles.description}>Location : {item.Location}</Text>
+                    }
                     <View >                   
                            
                     <TextField
@@ -128,9 +128,9 @@ export default class UpdateSettings extends Component {
                 </ScrollView>
               </View>
               <View style={styles.popupButtons}>
-                <TouchableOpacity onPress={() => { this.state.password && this.state.imageUrl? this.submit(item.id):
-                                                  !this.state.password && this.state.imageUrl? this.updateImage(item.id, username):  
-                                                   this.state.password &&!this.state.imageUrl? this.updatePassword(item.id): setModalVisible(false) 
+                <TouchableOpacity onPress={() => { this.state.password && this.state.imageUrl? this.submit(item.Id):
+                                                  !this.state.password && this.state.imageUrl? this.updateImage(item.Id, username):  
+                                                   this.state.password &&!this.state.imageUrl? this.updatePassword(item.Id): setModalVisible(false) 
                                                  }} 
                                   style={styles.btnClose}>
                   <Text style={styles.txtClose}>{this.state.password && this.state.imageUrl? "Submit": 

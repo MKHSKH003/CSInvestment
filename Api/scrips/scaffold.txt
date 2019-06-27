@@ -1,8 +1,13 @@
 Scaffold-DbContext "server=41.185.8.134;userid=targeton_root;password=WebDev@2017;database=targeton_CSInvestment;SSL Mode=None;" MySql.Data.EntityFrameworkCore -OutputDir targeton_TicketSystem -Tables courses, studentCourses -f
 
-Scaffold-DbContext "server=41.185.8.134;userid=targeton_root_Dev;password=WebDev@2019;database=targeton_CSInvestment_Dev;SSL Mode=None;" MySql.Data.EntityFrameworkCore -OutputDir targeton_CSInvestment_Dev -Tables marketUpdates -f
+Scaffold-DbContext "server=41.185.8.134;userid=targeton_root_Dev;password=WebDev@2019;database=targeton_CSInvestment_Dev;SSL Mode=None;" MySql.Data.EntityFrameworkCore -OutputDir Base -Tables StudentCourses -f
 
 react-native bundle --platform android --dev false --entry-file index.js --bundle-output andr
 oid/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res
 
 netstat -ano | findstr :5037
+
+ALTER TABLE StudentCourse 
+ADD CONSTRAINT FK_StudentCourse_Course 
+FOREIGN KEY (CourseID) 
+REFERENCES Course(ID)

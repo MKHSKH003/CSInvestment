@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using CSInvestmentApi.Entities;
-using CSInvestmentApi.Converters;
 
 namespace CSInvestmentApi.Services
 {
@@ -14,29 +13,29 @@ namespace CSInvestmentApi.Services
             _ticketSystemDbContext = ticketSystemDbContext;
         }
 
-        public IEnumerable<ChatRoomMessages> GetMessages(int id)
+        public IEnumerable<Message> GetChatMessages(int id)
         {
-            return _ticketSystemDbContext.ChatRoomMessages.Where(message => message.ChatRoomId == id)
-                                                          .Select(message => MessagesConveter.ConvertMessageToEntityModel(message));
+            return _ticketSystemDbContext.Message.Where(message => message.ChatRoomId == id).ToList();
         }
 
-        public IEnumerable<ChatRoomMessages> GetAllMessages()
+        public IEnumerable<Message> GetAllMessages()
         {
-            return _ticketSystemDbContext.ChatRoomMessages.Select(message => MessagesConveter.ConvertMessageToEntityModel(message));
+            return _ticketSystemDbContext.Message;
         }
 
-        public IEnumerable<ChatRoomMessages> SendMessage(int id, string username, string message)
+        public Message SendMessage(int id, string username, string message)
         {
-            _ticketSystemDbContext.ChatRoomMessages.Add(new ChatRoomMessages()
+            Message UserMessage = new Message()
             {
-                Username = username,
+                StudentId = id,
                 ChatRoomId = id,
-                Message = message,
+                UserMessage = message,
                 Date = DateTime.Now.ToShortTimeString()
-            });
+            };
+            _ticketSystemDbContext.Message.Add(UserMessage);
             _ticketSystemDbContext.SaveChanges();
 
-            return GetMessages(id);
+            return UserMessage;
         }
     }
 }

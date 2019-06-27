@@ -1,10 +1,8 @@
 ﻿ using System;
 using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using CSInvestmentApi.Entities;
-using CSInvestmentApi.Converters;
-using CSInvestmentApi.Models;
-using System.Net;
 
 namespace CSInvestmentApi.Services
 {
@@ -19,13 +17,12 @@ namespace CSInvestmentApi.Services
             _eventLoggerService = eventLoggerService;
         }
 
-        public IEnumerable<Groups>  Get()
+        public IEnumerable<ChatRoom> Get()
         {
-            IEnumerable<Students> students = _ticketSystemDbContext.Students.Select(student => StudentsConveter.ConvertStudentToEntityModel(student));
-            IEnumerable<ChatRooms> chatRooms = _ticketSystemDbContext.ChatRooms.Select(chatRoom => ChatRoomsConveter.ConvertChatRoomToEntityModel(chatRoom));
-            IEnumerable<Groups> groups = chatRooms.Select(chatRoom => ChatRoomsConveter.ConvertGroupToEntityModel(chatRoom, students));
-
-            return groups;
+            return _ticketSystemDbContext.ChatRoom
+                .Include(cr => cr.Messages)
+                .Include(cr => cr.StudentChatRooms)
+                    .ThenInclude( scr => scr.Student);
         }
 
     }

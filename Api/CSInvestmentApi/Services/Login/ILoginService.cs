@@ -8,7 +8,7 @@ namespace CSInvestmentApi.Services
 {
     public interface ILoginService
     {
-        Students Authentication(string username, string password);
+        Student Authentication(string username, string password);
         void logout(string username);
     }
 }

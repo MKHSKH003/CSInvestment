@@ -29,7 +29,7 @@ const loginReducer = (state = {status:{isLoginSuccess: true}}, action) => {
      }
      case LOGIN_SUCCESS:{
         return { ...state, 
-                 student:action.student,
+                 student: action.student,
                  status:{
                     isLoginSuccess: true ,
                     loading: false,

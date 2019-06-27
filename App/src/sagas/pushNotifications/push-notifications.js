@@ -5,28 +5,37 @@ import {Actions, ActionConst} from 'react-native-router-flux';
 import { ToastActionsCreators } from 'react-native-redux-toast';
 
 import {
-  STORE_USER_DEVICE,
-  loadUserDevicesSuccess
+  STORE_USER_DEVICE_REQUEST,
+  LOAD_USER_DEVICES_REQUEST,
+  loadUserDevicesSuccess,
+  storeUserDeviceSuccess
 } from '../../actions/pushNotificationsActions';
 
 import {pushNotificationsApi} from '../../api';
 import { pushNotificationsBaseUrl } from "../../constants/api-selectors.js";
 
 export function* addUserDevice(action) {
-  try {   
-      let userDevices = yield call(pushNotificationsApi.addUserDevice, pushNotificationsBaseUrl, action.id, action.username, action.deviceToken);
-      if(userDevices==undefined){throw Error;}
-      yield put(loadUserDevicesSuccess(userDevices));
-  }
-  catch(e) { yield put(ToastActionsCreators.displayError(e.message, 2000)); }
+  yield call(pushNotificationsApi.addUserDevice, pushNotificationsBaseUrl, action.userId, action.deviceToken);
+  yield put(storeUserDeviceSuccess(action.userId, action.deviceToken));
 }
 
-export function* watcherPushNotifications() {
-     yield takeLatest(STORE_USER_DEVICE, addUserDevice)
+export function* watcherStoreUserDevice() {
+     yield takeLatest(STORE_USER_DEVICE_REQUEST, addUserDevice)
 }
 
+export function* loadUserDevices() {
+    let userDevices = yield call(pushNotificationsApi.getUserDevices, pushNotificationsBaseUrl);
+    yield put(loadUserDevicesSuccess(userDevices));
+}
+
+export function* watcherLoadUserDevices() {
+  yield takeLatest(LOAD_USER_DEVICES_REQUEST, loadUserDevices)
+}
 
 export function* pushNotificationsSaga() {
-    yield call(watcherPushNotifications);
+yield all([
+    watcherStoreUserDevice(),
+    watcherLoadUserDevices()
+  ]);
 }
 

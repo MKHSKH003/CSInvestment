@@ -75,7 +75,7 @@ export default class MarketUpdates extends Component {
       <ScrollView>
       <Header props={this.props} />
       
-      {!loading && currentUser.isAdmin == 1 &&
+      {!loading && currentUser.IsAdmin == 1 &&
       <Button
             transparent={true}
             style={{backgroundColor: '#4682B4', borderRadius:20}}
@@ -104,7 +104,7 @@ export default class MarketUpdates extends Component {
           renderItem={(post) => {
             const item = post.item;
             return (
-              <TouchableOpacity onPress={()=>currentUser.isAdmin == 1 && this.openDeleteModal(item.id)}> 
+              <TouchableOpacity onPress={()=>currentUser.IsAdmin == 1 && this.openDeleteModal(item.id)}> 
               <View style={styles.card}>
                   <FitImage
                       indicator={true} // disable loading indicator

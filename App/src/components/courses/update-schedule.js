@@ -13,6 +13,8 @@ import {
   ScrollView
 } from 'react-native';
 
+import {pushNotificationsApi} from '../../api';
+
 export default class Users extends Component {
 
   constructor(props) {
@@ -23,11 +25,21 @@ export default class Users extends Component {
       venue:"none"
     };
   }
+  
+  sendPushNotifications() {
+    var notifications = [];
+    this.props.devices.map((device) => {
+         notifications.push({"to":device.deviceToken,"title":"CSInvestment","body":"New market update added.","sound":"default"});
+     });
+     pushNotificationsApi.sendPushNotifications(notifications);
+     console.log("notifications sent...")
+   }
 
   updateSchedule(id, username)
   {
      this.props.updateSchedule(id, this.state.date, this.state.venue, username)
      this.props.setUpdateScheduleVisible(false)
+     this.sendPushNotifications()
   }
 
   render() {
@@ -46,10 +58,10 @@ export default class Users extends Component {
             <View style={styles.popup}>
               <View style={styles.popupContent}>
                 <ScrollView contentContainerStyle={styles.modalInfo}>
-                    <Image style={styles.image} source={{uri: courseSelected.image}}/>
-                    <Text style={styles.name}>{courseSelected.name}</Text>
-                    <Text style={styles.position}>Venue: {courseSelected.venue}</Text>
-                    <Text style={styles.about}>Time: {courseSelected.time}</Text>
+                    <Image style={styles.image} source={{uri: courseSelected.Image}}/>
+                    <Text style={styles.name}>{courseSelected.Name}</Text>
+                    <Text style={styles.position}>Venue: {courseSelected.Venue}</Text>
+                    <Text style={styles.about}>Time: {courseSelected.Time}</Text>
               
                 <DatePicker
                   style={{width: 200, marginTop:20, alignSelf:'center', alignItems:'center',justifyContent:'center'}}
@@ -86,7 +98,7 @@ export default class Users extends Component {
 
               </View>
               <View style={styles.popupButtons}>
-                <TouchableOpacity onPress={() => {this.state.date!="none" || this.state.venue!="none"? this.updateSchedule(courseSelected.id, username):setUpdateScheduleVisible(false) }} style={styles.btnClose}>
+                <TouchableOpacity onPress={() => {this.state.date!="none" || this.state.venue!="none"? this.updateSchedule(courseSelected.Id, username):setUpdateScheduleVisible(false) }} style={styles.btnClose}>
                   <Text style={styles.txtClose}>{this.state.date!="none" || this.state.venue!="none"? 'Update schedule...' : 'Close'}</Text>
                 </TouchableOpacity>
               </View>

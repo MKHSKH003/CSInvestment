@@ -6,7 +6,7 @@ import { ToastActionsCreators } from 'react-native-redux-toast';
 
 import {
   UPDATE_PAYMENT_STATUS_REQUEST,
-  loadStudentsSuccess,
+  updatePaymentStatusSuccess,
 } from '../../actions/studentsActions';
 
 import {studentsApi} from '../../api';
@@ -15,10 +15,9 @@ import { studentsBaseUrl } from "../../constants/api-selectors.js";
 export function* updatePaymentStatus(action) {
   try 
   {   
-      const students = yield call(studentsApi.updatePaymentStatus,studentsBaseUrl,action.id,action.username);
-      if(students==undefined){throw Error;}
+      yield call(studentsApi.updatePaymentStatus,studentsBaseUrl,action.id,action.username);
       yield put(ToastActionsCreators.displaySuccess('Payment status updated successfully!', 5000));
-      yield put(loadStudentsSuccess(students));
+      yield put(updatePaymentStatusSuccess(action.id));
   }
   catch(e)
   {

@@ -5,7 +5,8 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "eject": "expo eject",
-    "test": "node ./node_modules/jest/bin/jest.js --watchAll"
+    "test": "node ./node_modules/jest/bin/jest.js --watchAll",
+    "postinstall": "rndebugger-open --expo"
   },
   "jest": {
     "preset": "jest-expo"
@@ -39,7 +40,7 @@
     "react-native-svg-charts": "^5.2.0",
     "react-native-toaster": "^1.2.2",
     "react-native-vector-icons": "^6.1.0",
-    "react-navigation": "^3.0.9",
+    "react-navigation": "^3.11.0",
     "react-redux": "^6.0.0",
     "react-router": "^4.3.1",
     "redux": "^4.0.1",
@@ -51,7 +52,8 @@
   },
   "devDependencies": {
     "babel-preset-expo": "^5.0.0",
-    "jest-expo": "^32.0.1"
+    "jest-expo": "^32.0.1",
+    "react-native-debugger-open": "^0.3.19"
   },
   "private": true
 }

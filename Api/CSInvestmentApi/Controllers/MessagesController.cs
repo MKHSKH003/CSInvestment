@@ -9,7 +9,7 @@ using CSInvestmentApi.Entities;
 
 namespace CSInvestmentApi.Controllers
 {
-    [Route("api/chatMessages")]
+    [Route("api/messages")]
     public class MessagesController : Controller
     {
         private readonly IMessagesService _messagesService;
@@ -18,20 +18,20 @@ namespace CSInvestmentApi.Controllers
             _messagesService = messagesService;
         }
 
-        [HttpGet("get-messages")]
-        public IEnumerable<ChatRoomMessages> GetMessages([FromQuery] int id)
-        {
-            return _messagesService.GetMessages(id);
-        }
-
         [HttpGet("get-all-messages")]
-        public IEnumerable<ChatRoomMessages> GetAllMessages()
+        public IEnumerable<Message> Get()
         {
             return _messagesService.GetAllMessages();
         }
 
+        [HttpGet("get-chat-messages")]
+        public IEnumerable<Message> Chat([FromQuery] int id)
+        {
+            return _messagesService.GetChatMessages(id);
+        }
+
         [HttpGet("send-message")]
-        public IEnumerable<ChatRoomMessages> SendMessage([FromQuery] int id, [FromQuery] string username, [FromQuery] string message)
+        public Message Send([FromQuery] int id, [FromQuery] string username, [FromQuery] string message)
         {
             return _messagesService.SendMessage(id, username, message);
         }

@@ -19,7 +19,6 @@ export const login = (username, password) => ({
 export const loginSuccess = (student) => ({
       type: LOGIN_SUCCESS,
       student
-      
 });
 
 export const loginFailure = () => ({

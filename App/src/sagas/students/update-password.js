@@ -15,15 +15,8 @@ import { studentsBaseUrl } from "../../constants/api-selectors.js";
 export function* updatePassword(action) {
   try 
   {
-      const students = yield call(studentsApi.updatePassword, studentsBaseUrl, action.id, action.password);
-      if(students.item1==undefined){throw Error;}
-      if(students.item2=="Success")
-      {
-        yield put(ToastActionsCreators.displaySuccess('Student password updated successfully!', 5000));
-        yield put(loadStudentsSuccess(students.item1));
-      }
-      else
-        yield put(ToastActionsCreators.displayError('Failed, '+students.item2, 2000));
+    yield call(studentsApi.updatePassword, studentsBaseUrl, action.id, action.password);
+    yield put(ToastActionsCreators.displaySuccess('Student password updated successfully!', 5000));
   }
   catch(e)
   {
