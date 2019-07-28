@@ -10,6 +10,6 @@ namespace CSInvestmentApi.Services
     {
         IEnumerable<Message> GetChatMessages(int id);
         IEnumerable<Message> GetAllMessages();
-        Message SendMessage(int id, string username, string message);
+        void SendMessage(int id, string username, int userId, string message);
     }
 }

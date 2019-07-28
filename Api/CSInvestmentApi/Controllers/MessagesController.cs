@@ -31,9 +31,10 @@ namespace CSInvestmentApi.Controllers
         }
 
         [HttpGet("send-message")]
-        public Message Send([FromQuery] int id, [FromQuery] string username, [FromQuery] string message)
+        public ActionResult Send([FromQuery] int id, [FromQuery] string username, [FromQuery] int userId, [FromQuery] string message)
         {
-            return _messagesService.SendMessage(id, username, message);
+            _messagesService.SendMessage(id, username, userId, message);
+            return Json(new { Message = "Success" });
         }
 
     }

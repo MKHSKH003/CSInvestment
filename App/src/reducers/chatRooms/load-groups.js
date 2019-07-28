@@ -2,7 +2,8 @@ import {
  LOAD_GROUPS_REQUEST,
  LOAD_GROUPS_SUCCESS,
  LOAD_GROUPS_FAILURE,
- LOAD_GROUPS_SYSTEM_DATA_REQUEST
+ LOAD_GROUPS_SYSTEM_DATA_REQUEST,
+ SEND_MESSAGE_TO_GROUP_SUCCESS
 } from '../../actions/chatRoomsActions'
 
 export const initialState = {
@@ -43,6 +44,21 @@ const loadGroupsReducer = (state = initialState, action) => {
                  }
             };
      }
+
+     case SEND_MESSAGE_TO_GROUP_SUCCESS:{
+         return { ...state,
+                  groups: state.groups.map(g => (
+                     g.Id == action.id ? {
+                        ...g,
+                        Messages: g.Messages.concat({'Date': (new Date()).toLocaleTimeString(),'ChatRoomId': action.id, 'UserMessage': action.message, 'Student': {'Name': action.username}}),
+                     } : g
+                  )),
+
+                  status:{
+                     loading: false, 
+                  }
+            };
+      }
      default:
         return state;
    }

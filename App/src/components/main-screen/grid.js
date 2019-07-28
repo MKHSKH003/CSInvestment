@@ -40,6 +40,7 @@ export default class MainGrid extends Component {
   
   openStats(screen, color){
     this.props.onLoadStudents();
+    this.props.onLoadStudentCourses();
     Actions.statistics({color:color,title:screen})
   }
   navigate(screen, color){
@@ -47,9 +48,9 @@ export default class MainGrid extends Component {
      if(screen =='NEW STUDENT'){this.props.currentUser.IsAdmin == 1 ? Actions.addStudent({color:color,title:screen}) : this.props.sendInfo("Access denied");}
      else if(screen =='STUDENTS'){this.props.onLoadStudents();Actions.viewStudents({color:color,title:screen});}
      else if(screen =='COURSES'){this.props.onLoadCourses();Actions.courses({color:color,title:screen});}
-     else if(screen =='FINANCIAL EDUCATION'){Actions.financialEducation({color:color,title:screen});}  
+     else if(screen =='FINANCIAL EDUCATION'){this.props.onLoadMarketUpdates();Actions.financialEducation({color:color,title:screen});}  
      else if(screen =='STATISTICS'){this.props.currentUser.IsAdmin == 1 ? this.openStats(screen, color): this.props.sendInfo("Access Denied") } 
-     else if(screen =='CHAT ROOM'){Actions.chatrooms({color:color,title:screen});}  
+     else if(screen =='CHAT ROOM'){this.props.onLoadGroups();Actions.chatrooms({color:color,title:screen});}  
   }
 
   componentDidMount(){
@@ -73,7 +74,6 @@ export default class MainGrid extends Component {
     }
 
     let token = await Notifications.getExpoPushTokenAsync();
-    console.log('this.props.currentUser.Id, token',this.props.currentUser.Id, token)
     this.props.storeUserDevice(this.props.currentUser.Id, token);
   }
 

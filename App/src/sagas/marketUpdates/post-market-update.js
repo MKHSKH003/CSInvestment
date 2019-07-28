@@ -1,12 +1,10 @@
 
 import { call, put, takeLatest, all, fork } from 'redux-saga/effects';
-import { takeEvery } from 'redux-saga';
-import {Actions, ActionConst} from 'react-native-router-flux';
 import { ToastActionsCreators } from 'react-native-redux-toast';
 
 import {
   POST_MARKET_UPDATE_REQUEST,
-  loadMarketUpdatesSuccess,
+  postMarketUpdatesSuccess,
 } from '../../actions/marketUpdatesActions';
 
 import {marketUpdatesApi} from '../../api';
@@ -15,10 +13,9 @@ import { marketUpdatesBaseUrl } from "../../constants/api-selectors.js";
 export function* postMarketUpdate(action) {
   try 
   {   
-      const marketUpdates = yield call(marketUpdatesApi.postMarketUpdates, marketUpdatesBaseUrl, action.avatar, action.caption);
-      if(marketUpdates==undefined){throw Error;}
+      yield call(marketUpdatesApi.postMarketUpdates, marketUpdatesBaseUrl, action.avatar, action.caption);
       yield put(ToastActionsCreators.displaySuccess('Market update uploaded successfully!', 5000));
-      yield put(loadMarketUpdatesSuccess(marketUpdates));
+      yield put(postMarketUpdatesSuccess(action.avatar, action.caption));
   }
   catch(e)
   {

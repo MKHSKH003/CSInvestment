@@ -8,7 +8,7 @@ import { loadCoursesRequest, loadStudentCoursesRequest, loadCoursesSystemDataReq
 import { storeUserDeviceRequest, loadUserDevicesRequest } from '../../actions/pushNotificationsActions'
 import { loadAllMessagesRequest, loadMessagesSystemDataRequest } from '../../actions/chatMessagesActions'
 import { loadGroupsRequest, loadGroupsSystemDataRequest } from '../../actions/chatRoomsActions'
-import { loadMarketUpdatesSystemDataRequest} from '../../actions/marketUpdatesActions'
+import { loadMarketUpdatesRequest} from '../../actions/marketUpdatesActions'
 
 const mapStateToProps = (state) => {
     return{
@@ -25,7 +25,8 @@ const mapDispatchToProps =(dispatch,props)=>{
       onLoadMessages: ()=> dispatch(loadAllMessagesRequest()),
       onLoadGroups: ()=> dispatch(loadGroupsRequest()),
       storeUserDevice: (id, deviceToken) => dispatch(storeUserDeviceRequest(id, deviceToken)),
-      onLoadUserDevices: ()=> dispatch(loadUserDevicesRequest())
+      onLoadUserDevices: ()=> dispatch(loadUserDevicesRequest()),
+      onLoadMarketUpdates: ()=> dispatch(loadMarketUpdatesRequest())
     }
 };
 

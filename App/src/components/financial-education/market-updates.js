@@ -94,7 +94,7 @@ export default class MarketUpdates extends Component {
         <FlatList style={styles.list}
           data={marketUpdates}
           keyExtractor= {(item) => {
-            return item.id.toString();
+            return item.Id+"";
           }}
           ItemSeparatorComponent={() => {
             return (
@@ -104,18 +104,18 @@ export default class MarketUpdates extends Component {
           renderItem={(post) => {
             const item = post.item;
             return (
-              <TouchableOpacity onPress={()=>currentUser.IsAdmin == 1 && this.openDeleteModal(item.id)}> 
+              <TouchableOpacity onPress={()=>currentUser.IsAdmin == 1 && this.openDeleteModal(item.Id)}> 
               <View style={styles.card}>
                   <FitImage
                       indicator={true} // disable loading indicator
                       indicatorColor="red" // react native colors or color codes like #919191
                       indicatorSize="large" // (small | large) or integer
-                      source={{ uri: item.avatar }}
+                      source={{ uri: item.Avatar }}
                       resizeMode="contain"
                     />
                   <View  style={styles.cardHeader}>
                   <View>
-                    <Text style={styles.title}>{item.caption}</Text>
+                    <Text style={styles.title}>{item.Caption}</Text>
                     <Text style={styles.description}>{item.datetime}</Text>
                   </View>
                 </View>
@@ -143,6 +143,7 @@ export default class MarketUpdates extends Component {
                     <Text style={styles.txtClose}>DELETE</Text>
                   </TouchableOpacity>
                 </View>
+                
                 <View style={{marginLeft:10}}>
                   <TouchableOpacity onPress={() => this.setDeleteModalVisible(false) } style={styles.btnClose}>
                     <Text style={styles.txtClose}>CANCEL</Text>

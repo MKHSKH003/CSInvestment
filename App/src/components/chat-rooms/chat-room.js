@@ -40,8 +40,8 @@ export default class ChatRoom extends Component {
   }
 
   render() {
-    const {messages, username, loading, sendMessage, id}= this.props
-    
+    const { currentUser, loading, sendMessage, id, groups }= this.props
+
     return (
       <View style={styles.container}>
         <Header props={this.props} />
@@ -50,21 +50,21 @@ export default class ChatRoom extends Component {
           ref={ref => this.flatList = ref}
           onContentSizeChange={() => this.flatList.scrollToEnd({animated: true})}
           onLayout={() => this.flatList.scrollToEnd({animated: true})}
-          data={messages}
+          data={(groups.filter(g => g.Id == id)[0]).Messages}
           keyExtractor= {(item) => {
-            return (item.id).toString();
+            return (item.Id)+'';
           }}
           renderItem={(message) => {
             const item =!loading? message.item:[];
-            let inMessage = item.username?(item.username).toLowerCase() !== (username).toLowerCase():null;
+            let inMessage = item.Student.Name? (item.Student.Name).toLowerCase() !== (currentUser.Name).toLowerCase() : false;
             let itemStyle = inMessage ? styles.itemIn : styles.itemOut;
             return (
               <View style={[styles.item, itemStyle]}>
                 <View style={[styles.balloon]}>
-                  <Text>{item.message}</Text>
+                  <Text>{item.UserMessage}</Text>
                 </View>
-                {!inMessage && this.renderDate(item.date)}
-                {inMessage && this.renderDate(item.date+" "+item.username)}
+                {!inMessage && this.renderDate(item.Date)}
+                {inMessage && this.renderDate(item.Date+" "+item.Student.Name)}
               </View>
             )
           }}/>
@@ -77,7 +77,7 @@ export default class ChatRoom extends Component {
                   onChangeText={(value) => this.setState({userMessage:value})}/>
             </View>
 
-              <TouchableOpacity style={styles.btnSend} onPress={()=>{sendMessage(id, username,this.state.userMessage);this.setState({userMessage:''})}}>
+              <TouchableOpacity style={styles.btnSend} onPress={()=>{ if(this.state.userMessage.trim()) sendMessage(id, currentUser.Name, currentUser.Id, this.state.userMessage) ;this.setState({userMessage:''})}}>
                 <Image source={{uri:"https://png.icons8.com/small/75/ffffff/filled-sent.png"}} style={styles.iconSend}  />
               </TouchableOpacity>
           </View>

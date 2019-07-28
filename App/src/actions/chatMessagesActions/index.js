@@ -26,16 +26,12 @@ export const loadMessagesSuccess = (messages) => ({
       messages
 });
 
-export const sendMessageRequest = (id, username,message) => {
+export const sendMessageRequest = (id, username, userId, message) => {
     return{
       type: SEND_MESSAGE_REQUEST,
       id,
       username,
+      userId,
       message
    }
 };
-
-export const sendMessageSuccess = (messages) => ({
-      type: SEND_MESSAGE_SUCCESS,
-      messages
-});

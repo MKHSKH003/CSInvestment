@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import MarketUpdates from '../../components/financial-education/market-updates';
-import {PostMarketUpdateRequest, deleteRequest} from '../../actions/marketUpdatesActions'
+import {PostMarketUpdateRequest, deleteMarketUpdateRequest} from '../../actions/marketUpdatesActions'
 
 const mapStateToProps = (state) =>{
     return {
@@ -14,7 +14,7 @@ const mapStateToProps = (state) =>{
 const mapDispatchToProps =(dispatch)=>{
     return{
      PostMarketUpdates:(avatar, caption) => {return dispatch(PostMarketUpdateRequest(avatar, caption));},
-     deleteMarketUpdate: (id) =>  { return dispatch(deleteRequest(id)); }
+     deleteMarketUpdate: (id) =>  { return dispatch(deleteMarketUpdateRequest(id)); }
     }
 };
 

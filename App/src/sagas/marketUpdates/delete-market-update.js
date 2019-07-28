@@ -5,8 +5,8 @@ import {Actions, ActionConst} from 'react-native-router-flux';
 import { ToastActionsCreators } from 'react-native-redux-toast';
 
 import {
-  DELETE_REQUEST,
-  loadMarketUpdatesSuccess,
+  DELETE_MARKET_UPDATE_REQUEST,
+  deleteMarketUpdateSuccess
 } from '../../actions/marketUpdatesActions';
 
 import {marketUpdatesApi} from '../../api';
@@ -15,10 +15,9 @@ import { marketUpdatesBaseUrl } from "../../constants/api-selectors.js";
 export function* deletetMarketUpdate(action) {
   try 
   {   
-      const marketUpdates = yield call(marketUpdatesApi.deleteMarketUpdate, marketUpdatesBaseUrl, action.id);
-      if(marketUpdates==undefined){throw Error;}
+      yield call(marketUpdatesApi.deleteMarketUpdate, marketUpdatesBaseUrl, action.id);
       yield put(ToastActionsCreators.displaySuccess('Market update deleted successfully!', 5000));
-      yield put(loadMarketUpdatesSuccess(marketUpdates));
+      yield put(deleteMarketUpdateSuccess(action.id));
   }
   catch(e)
   {
@@ -28,7 +27,7 @@ export function* deletetMarketUpdate(action) {
 }
 
 export function* watcherDeleteMarketUpdate() {
-     yield takeLatest(DELETE_REQUEST, deletetMarketUpdate)
+     yield takeLatest(DELETE_MARKET_UPDATE_REQUEST, deletetMarketUpdate)
 }
 
 export function* deleteMarketUpdateSaga() {

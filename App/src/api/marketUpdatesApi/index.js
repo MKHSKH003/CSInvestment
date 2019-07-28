@@ -1,5 +1,3 @@
-import axios, { post } from 'axios';
-
 export const getMarketUpdates = (marketUpdatesBaseUrl) =>
 {
 

@@ -23,11 +23,11 @@ namespace CSInvestmentApi.Services
             return _ticketSystemDbContext.Message;
         }
 
-        public Message SendMessage(int id, string username, string message)
+        public void SendMessage(int id, string username, int userId, string message)
         {
             Message UserMessage = new Message()
             {
-                StudentId = id,
+                StudentId = userId,
                 ChatRoomId = id,
                 UserMessage = message,
                 Date = DateTime.Now.ToShortTimeString()
@@ -35,7 +35,6 @@ namespace CSInvestmentApi.Services
             _ticketSystemDbContext.Message.Add(UserMessage);
             _ticketSystemDbContext.SaveChanges();
 
-            return UserMessage;
         }
     }
 }

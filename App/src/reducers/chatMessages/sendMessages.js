@@ -24,15 +24,7 @@ const sendMessageReducer = (state = initialState, action) => {
                  }
         };
      }
-     case SEND_MESSAGE_SUCCESS:{
-        return { ...state,
-                 messages:action.messages,
-                 status:{
-                    loading: false, 
-                 }
-            };
-     }
-    
+     
      default:
         return state;
    }

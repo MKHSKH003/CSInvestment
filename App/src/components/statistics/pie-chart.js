@@ -10,7 +10,7 @@ class PieChartWithCenteredLabels extends React.PureComponent {
             return a + b;
         }
     render() {
-        const {students} = this.props;
+        const {students, studentCourses} = this.props;
 
         const data = [
             {
@@ -20,17 +20,17 @@ class PieChartWithCenteredLabels extends React.PureComponent {
             },
             {
                 key: 2,
-                amount: students.filter(function(x){return x.courses.includes('Beginner')}).length,
+                amount: studentCourses.filter(function(x){return x.CourseId == 1}).length,
                 svg: { fill: '#3498db' }
             },
             {
                 key: 3,
-                amount: students.filter(function(x){return x.courses.includes('Intermediate')}).length,
+                amount: studentCourses.filter(function(x){return x.CourseId == 2}).length,
                 svg: { fill: '#34495e' }
             },
             {
                 key: 4,
-                amount: students.filter(function(x){return x.courses.includes('Advance')}).length,
+                amount: students.filter(function(x){return x.CourseId == 3}).length,
                 svg: { fill: 'green' }
             }
         ]

@@ -99,7 +99,7 @@ export default class PostMarketUpdate extends Component {
                         style={{backgroundColor: '#4682B4',borderRadius:20, width:300}}
                         color='black'
                         title={"Upload update"}
-                         onPress={this._pickImage.bind(this)}
+                        onPress={this._pickImage.bind(this)}
                      />
         
                      {image &&

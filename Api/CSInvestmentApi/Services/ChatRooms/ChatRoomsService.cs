@@ -21,6 +21,7 @@ namespace CSInvestmentApi.Services
         {
             return _ticketSystemDbContext.ChatRoom
                 .Include(cr => cr.Messages)
+                    .ThenInclude(scr => scr.Student)
                 .Include(cr => cr.StudentChatRooms)
                     .ThenInclude( scr => scr.Student);
         }

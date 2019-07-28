@@ -6,9 +6,11 @@ import { ToastActionsCreators } from 'react-native-redux-toast';
 
 import {
   SEND_MESSAGE_REQUEST,
-  sendMessageSuccess,
-  loadMessagesSuccess
 } from '../../actions/chatMessagesActions';
+
+import {
+  sendMessageSuccess,
+} from '../../actions/chatRoomsActions';
 
 import {chatMessagesApi} from '../../api';
 import { chatMessagesBaseUrl } from "../../constants/api-selectors.js";
@@ -16,9 +18,8 @@ import { chatMessagesBaseUrl } from "../../constants/api-selectors.js";
 export function* sendMessage(action) {
   try 
   {   
-      const messages = yield call(chatMessagesApi.sendMessage, chatMessagesBaseUrl, action.id, action.username, action.message);
-      if(messages==undefined){throw Error;}
-      yield put(loadMessagesSuccess(messages));
+      yield call(chatMessagesApi.sendMessage, chatMessagesBaseUrl, action.id, action.username, action.userId, action.message);
+      yield put(sendMessageSuccess(action.id, action.username, action.message));
   }
   catch(e)
   {

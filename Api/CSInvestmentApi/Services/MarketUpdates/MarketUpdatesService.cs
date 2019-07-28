@@ -18,7 +18,7 @@ namespace CSInvestmentApi.Services
 
         public IEnumerable<Post> Get()
         {
-            return _ticketSystemDbContext.Post;
+            return _ticketSystemDbContext.Post.OrderBy(post => post.Datetime);
         }
 
         public Post Post(string url, string caption)

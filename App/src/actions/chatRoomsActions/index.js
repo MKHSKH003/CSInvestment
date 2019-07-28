@@ -4,6 +4,8 @@ export const LOAD_GROUPS_FAILURE = 'LOAD_GROUPS_FAILURE';
 
 export const LOAD_GROUPS_SYSTEM_DATA_REQUEST = 'LOAD_GROUPS_SYSTEM_DATA_REQUEST';
 
+export const SEND_MESSAGE_TO_GROUP_SUCCESS = 'SEND_MESSAGE_TO_GROUP_SUCCESS';
+
 export const loadGroupsSystemDataRequest = () => ({
       type: LOAD_GROUPS_SYSTEM_DATA_REQUEST,
 });
@@ -21,4 +23,11 @@ export const loadGroupsRequest = () => {
 
 export const loadGroupsFailure = () => ({
       type: LOAD_GROUPS_FAILURE,
+});
+
+export const sendMessageSuccess = (id, username, message) => ({
+      type: SEND_MESSAGE_TO_GROUP_SUCCESS,
+      id,
+      username,
+      message
 });

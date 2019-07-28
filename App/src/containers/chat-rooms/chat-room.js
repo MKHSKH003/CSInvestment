@@ -6,12 +6,13 @@ export const mapStateToProps = (state) => {
     return {
         loading: state.loadMessagesReducer.status.loading,
         username: state.loginReducer.username,
+        groups: state.loadGroupsReducer.groups
     };
 };
 
 const mapDispatchToProps =(dispatch)=>{
     return{
-     sendMessage: (id, username, message) => { return dispatch(sendMessageRequest(id, username, message));},
+     sendMessage: (id, username, userId, message) => { return dispatch(sendMessageRequest(id, username, userId, message));},
     }
 };
 

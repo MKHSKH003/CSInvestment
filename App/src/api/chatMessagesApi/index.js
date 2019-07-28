@@ -10,8 +10,8 @@ export const getAllMessages = (chatMessagesBaseUrl) =>
            .then(response =>{return response.json()});
 };
 
-export const sendMessage = (messagesBaseUrl, id, username, message) =>{
-   return fetch(messagesBaseUrl+`send-message?id=${id}&username=${username}&message=${message}`).then(response => response.json()).catch(error => {
+export const sendMessage = (messagesBaseUrl, id, username, userId, message) =>{
+   return fetch(messagesBaseUrl+`send-message?id=${id}&username=${username}&userId=${userId}&message=${message}`).then(response => response.json()).catch(error => {
           console.log(error)
   }); 
    
