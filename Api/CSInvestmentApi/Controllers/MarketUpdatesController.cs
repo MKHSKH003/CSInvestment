@@ -1,16 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using CSInvestmentApi.Model;
+﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using CSInvestmentApi.Services;
 using CSInvestmentApi.Entities;
-using CSInvestmentApi.Models;
-using Microsoft.AspNetCore.Http;
-using System.Runtime.Serialization.Json;
-using System.Reflection.Metadata;
-using System.IO;
 
 namespace CSInvestmentApi.Controllers
 {

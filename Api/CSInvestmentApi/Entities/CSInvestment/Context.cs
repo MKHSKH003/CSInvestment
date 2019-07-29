@@ -1,7 +1,5 @@
-﻿using System;
-using CSInvestmentApi.Model;
+﻿using CSInvestmentApi.Model;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.Extensions.Options;
 
 namespace CSInvestmentApi.Entities

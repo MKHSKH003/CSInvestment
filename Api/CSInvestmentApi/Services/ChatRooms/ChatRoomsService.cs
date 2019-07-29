@@ -1,7 +1,5 @@
-﻿ using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
-using System.Linq;
 using CSInvestmentApi.Entities;
 
 namespace CSInvestmentApi.Services

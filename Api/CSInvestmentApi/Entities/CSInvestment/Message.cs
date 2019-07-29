@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace CSInvestmentApi.Entities
+﻿namespace CSInvestmentApi.Entities
 {
     public class Message
     {

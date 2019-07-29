@@ -24,7 +24,7 @@ namespace CSInvestmentApi.Services
         }
 
         public void SendMessage(int id, string username, int userId, string message)
-        {
+                                                                                             {
             Message UserMessage = new Message()
             {
                 StudentId = userId,

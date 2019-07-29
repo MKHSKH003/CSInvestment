@@ -2,7 +2,6 @@
 using CSInvestmentApi.Entities;
 using Microsoft.AspNetCore.Mvc;
 using CSInvestmentApi.Services;
-using CSInvestmentApi.Model;
 
 namespace CSInvestmentApi.Controllers
 {

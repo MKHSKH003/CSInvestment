@@ -2,9 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using CSInvestmentApi.Entities;
-using CSInvestmentApi.Converters;
-using System.Net;
-using System.IO;
 
 namespace CSInvestmentApi.Services
 {

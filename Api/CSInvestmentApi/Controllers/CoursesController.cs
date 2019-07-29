@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using CSInvestmentApi.Model;
+﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using CSInvestmentApi.Services;
 using CSInvestmentApi.Entities;
-using CSInvestmentApi.Models;
 
 namespace CSInvestmentApi.Controllers
 {
