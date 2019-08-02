@@ -50,7 +50,6 @@ export default class Groups extends Component {
     return (
       <ScrollView>
       <Header props={this.props} />
-      <Loader loading={loading} />
       <FlatList
         style={styles.root}
         data={groups}

@@ -20,7 +20,6 @@ export default class Statistics extends Component {
         <ScrollView >
             <Header props={this.props}/>
             <Text style={{textAlign:'center',fontSize:25, color:'#34495e',marginTop:30}}>Student - Courses</Text>
-            <LoadingStudents />
             <PieChartWithCenteredLabels studentCourses={this.props.studentCourses} students={this.props.students}/>
             <ChartLables/>
          </ScrollView>
