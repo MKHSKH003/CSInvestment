@@ -1,30 +1,21 @@
 export const getMarketUpdates = (marketUpdatesBaseUrl) =>
-{
+    fetch(marketUpdatesBaseUrl + `get-market-updates`)
+        .then(response => response.json());
 
-    return fetch(marketUpdatesBaseUrl+`get-market-updates`)
-           .then(response =>{return response.json()});
-};
-
-export const deleteMarketUpdate = (marketUpdatesBaseUrl, id) =>{
-   return fetch(marketUpdatesBaseUrl+`delete-market-update?id=${id}`)
-          .then(response => response.json())
-          .catch(error => {console.log(error)
-  }); 
-};
+export const deleteMarketUpdate = (marketUpdatesBaseUrl, id) =>
+    fetch(marketUpdatesBaseUrl + `delete-market-update?id=${id}`)
+        .then(response => response.json())
 
 
 export const postMarketUpdates = (marketUpdatesBaseUrl, avatar, caption) =>
-{    
-  return fetch(marketUpdatesBaseUrl+`post-market-update?caption=${caption}`,
-    {
-        method: 'POST',
-        body: JSON.stringify(avatar),
-        headers:{
-            'Content-Type': 'application/json'
-        }
-    }).then((response) => response.json())
-}
-
+    fetch(marketUpdatesBaseUrl + `post-market-update?caption=${caption}`,
+        {
+            method: 'POST',
+            body: JSON.stringify(avatar),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then((response) => response.json())
 
 
 

@@ -129,6 +129,8 @@ namespace CSInvestmentApi.Entities
                     .HasMaxLength(255)
                     .IsUnicode(false);
 
+                entity.Property(e => e.DatetTimeStamp).HasDefaultValueSql("CURRENT_TIMESTAMP");
+
                 entity.Property(e => e.UserMessage)
                     .IsRequired()
                     .HasColumnName("Message")

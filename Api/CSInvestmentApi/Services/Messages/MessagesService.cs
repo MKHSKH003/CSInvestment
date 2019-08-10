@@ -15,7 +15,9 @@ namespace CSInvestmentApi.Services
 
         public IEnumerable<Message> GetChatMessages(int id)
         {
-            return _ticketSystemDbContext.Message.Where(message => message.ChatRoomId == id).ToList();
+            return _ticketSystemDbContext.Message.Where(m => m.ChatRoomId == id)
+                .OrderBy(m => m.DatetTimeStamp)
+                .ToList();
         }
 
         public IEnumerable<Message> GetAllMessages()
@@ -30,7 +32,7 @@ namespace CSInvestmentApi.Services
                 StudentId = userId,
                 ChatRoomId = id,
                 UserMessage = message,
-                Date = DateTime.Now.ToShortTimeString()
+                Date = DateTime.Now.ToString("MM/dd HH:mm")
             };
             _ticketSystemDbContext.Message.Add(UserMessage);
             _ticketSystemDbContext.SaveChanges();

@@ -1,4 +1,6 @@
-﻿namespace CSInvestmentApi.Entities
+﻿using System;
+
+namespace CSInvestmentApi.Entities
 {
     public class Message
     {
@@ -7,6 +9,7 @@
         public string UserMessage { get; set; }
         public string Date { get; set; }
         public int StudentId { get; set; }
+        public DateTime? DatetTimeStamp { get; set; }
 
         public Student Student { get; set; }
     }
