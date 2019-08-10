@@ -97,10 +97,11 @@ namespace CSInvestmentApi.Services
         public void AddStudentCourse(int id, Models.ValuePair[] courses, string editedBy)
         {
             List<StudentCourse> studentCourse = _ticketSystemDbContext.StudentCourse.ToList();
+            List<StudentChatRoom> studentChatRoom = _ticketSystemDbContext.StudentChatRoom.ToList();
             foreach (Models.ValuePair pair in courses)
             {
-                var a = studentCourse.SingleOrDefault(sc => sc.StudentId == id && sc.CourseId == pair.value);
-                if  (a == null)
+                var checkStudentCourse = studentCourse.SingleOrDefault(sc => sc.StudentId == id && sc.CourseId == pair.value);
+                if  (checkStudentCourse == null)
                 {
                     _ticketSystemDbContext.StudentCourse.Add(new StudentCourse()
                     {
@@ -108,14 +109,32 @@ namespace CSInvestmentApi.Services
                         StudentId = id
                     });
                 }
+
+                var checkStudentChatRoom = studentChatRoom.SingleOrDefault(scr => scr.StudentId == id && scr.ChatRoomId == pair.value + 1);
+                if (checkStudentChatRoom == null)
+                {
+                    _ticketSystemDbContext.StudentChatRoom.Add(new StudentChatRoom()
+                    {
+                        ChatRoomId = pair.value + 1,
+                        StudentId = id
+                    });
+                }
             }
             _ticketSystemDbContext.SaveChanges();
         }
 
-        public void DeleteStudentCourseRecords(int StudentCourseId)
+        public void RemoveDeleteStudentCourse(int StudentCourseId)
         {
             var _studentCourse = _ticketSystemDbContext.StudentCourse.Find(StudentCourseId);
             _ticketSystemDbContext.StudentCourse.Remove(_studentCourse);
+
+            _ticketSystemDbContext.SaveChanges();
+        }
+
+        public void RemoveStudentChatRoom(int StudentChatRoomId)
+        {
+            var _studentChatRoom = _ticketSystemDbContext.StudentChatRoom.Find(StudentChatRoomId);
+            _ticketSystemDbContext.StudentChatRoom.Remove(_studentChatRoom);
 
             _ticketSystemDbContext.SaveChanges();
         }

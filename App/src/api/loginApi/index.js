@@ -7,5 +7,5 @@ export const login = (loginBaseUrl, username, password) =>
 export const logout = (loginBaseUrl, username) =>
 {
     return fetch(loginBaseUrl+`logout?username=${username}`)
-           .then(response =>{ return response});
+           .then(response =>  response);
 };

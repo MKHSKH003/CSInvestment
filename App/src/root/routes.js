@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
 import { Router, Scene, Actions, ActionConst } from 'react-native-router-flux';
 
-import LoginScreen from '../containers/login/login';
-import MainScreen from '../containers/main-screen/main';
-import AddStudent from '../containers/students/add-student';
-import ViewStudents from '../containers/students/load-students'
-import Courses from '../containers/courses/load-courses'
-import FinancialEducation from '../containers/financial-education/financial-education'
-import Statistics from '../containers/statistics/statistics';
-import ChatRooms from '../containers/chat-rooms/chat-rooms';
-import ChatRoom from '../containers/chat-rooms/chat-room';
-import MarketUpdates from '../containers/financial-education/market-updates'
+import LoginScreen from '../components/login/components/page/container';
+import MainScreen from '../components/main-screen/components/page/component';
+import AddStudent from '../components/new-student/components/page/container';
+import ViewStudents from '../components/students/list/components/page/container'
+import Courses from '../components/courses/components/page/container'
+import FinancialEducation from '../components/financial-education/list/components/page/container'
+import Statistics from '../components/statistics/components/page/container';
+import ChatRooms from '../components/chat-room/list/components/page/container';
+import ChatRoom from '../components/chat-room/view/components/page/container';
+import MarketUpdates from '../components/financial-education/view/components/market-updates/components/page/container'
 
 export default class Routes extends Component {
   render() {
@@ -20,50 +20,50 @@ export default class Routes extends Component {
 	        <Scene key="loginScreen"
 	          component={LoginScreen}
 	        	animation='fade'
-	          hideNavBar={true}
-	          initial={true}
+	          	hideNavBar={true}
+	          	initial={true}
 	        />
-				 <Scene key="mainScreen"
+			<Scene key="mainScreen"
 	          component={MainScreen}
 	          animation='fade'
 	          hideNavBar={true}
 	        />
-				 <Scene key="addStudent"
+			<Scene key="addStudent"
 	          component={AddStudent}
 	          animation='fade'
 	          hideNavBar={true}
 	         />
-				 <Scene key="viewStudents"
+			<Scene key="viewStudents"
 	          component={ViewStudents}
 	          animation='fade'
 	          hideNavBar={true}
 	         />
-				 <Scene key="courses"
+			<Scene key="courses"
 	          component={Courses}
 	          animation='fade'
 	          hideNavBar={true}
 	         />
-				 <Scene key="financialEducation"
+			<Scene key="financialEducation"
 	          component={FinancialEducation}
 	          animation='fade'
 	          hideNavBar={true}
 	         />
-				 <Scene key="statistics"
+			<Scene key="statistics"
 	          component={Statistics}
 	          animation='fade'
 	          hideNavBar={true}
 	         />
-				 <Scene key="chatrooms"
+			<Scene key="chatrooms"
 	          component={ChatRooms}
 	          animation='fade'
 	          hideNavBar={true}
 	         />
-					<Scene key="chatroom"
+			<Scene key="chatroom"
 	          component={ChatRoom}
 	          animation='fade'
 	          hideNavBar={true}
 	         />
-					 <Scene key="marketUpdates"
+			<Scene key="marketUpdates"
 	          component={MarketUpdates}
 	          animation='fade'
 	          hideNavBar={true}

@@ -23,9 +23,9 @@ namespace CSInvestmentApi.Controllers
         }
 
         [HttpGet("add-student")]
-        public string addStudent([FromQuery] string name, [FromQuery] string cell, [FromQuery] string email, [FromQuery] string location, [FromQuery] string isAdmin, [FromQuery] string createdBy)
+        public ActionResult addStudent([FromQuery] string name, [FromQuery] string cell, [FromQuery] string email, [FromQuery] string location, [FromQuery] string isAdmin, [FromQuery] string createdBy)
         {
-            return _studentService.addStudent(name , cell,email,location, isAdmin, createdBy);
+            return Json(new { Message =_studentService.addStudent(name, cell, email, location, isAdmin, createdBy) });
         }
 
         [HttpGet("update-payment-status")]

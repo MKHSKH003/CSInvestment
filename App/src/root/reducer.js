@@ -1,30 +1,22 @@
 import { combineReducers } from 'redux';
 import { toastReducer as toast } from 'react-native-redux-toast';
 
-import loginReducer  from '../reducers/login'
-import addStudentReducer  from '../reducers/students/add-student'
-import loadStudentsReducer  from '../reducers/students/load-students'
-import loadCoursesReducer from '../reducers/courses/load-courses'
-import loadStudentCoursesReducer from '../reducers/courses/load-student-courses'
-import loadMessagesReducer from '../reducers/chatMessages/load-messages'
-import loadGroupsReducer from '../reducers/chatRooms/load-groups'
-import loadAllMessagesReducer from '../reducers/chatMessages/load-all-messages'
-import loadMarketUpdatesReducer from '../reducers/marketUpdates/load-market-updates'
-import pushNotificationsReducer from '../reducers/pushNotifications/push-notifications'
-import loadSystemDataReducer from '../reducers/systemData/load-system-data'
+import loginReducer  from '../components/login/reducer'
+import StudentsReducer  from '../components/students/list/reducer'
+import CoursesReducer from '../components/courses/reducer'
+import MessagesReducer from '../components/chat-room/view/reducer'
+import GroupsReducer from '../components/chat-room/list/reducer'
+import MarketUpdatesReducer from '../components/financial-education/view/components/market-updates/reducer'
+import pushNotificationsReducer from '../components/main-screen/reducer'
 
 const rootReducer = combineReducers({
     loginReducer,
-    addStudentReducer,
-    loadStudentsReducer,
-    loadCoursesReducer,
-    loadStudentCoursesReducer,
-    loadMessagesReducer,
-    loadAllMessagesReducer,
-    loadGroupsReducer,
-    loadMarketUpdatesReducer,
+    StudentsReducer,
+    CoursesReducer,
+    MessagesReducer,
+    GroupsReducer,
+    MarketUpdatesReducer,
     pushNotificationsReducer,
-    loadSystemDataReducer,
     toast
 });
 
