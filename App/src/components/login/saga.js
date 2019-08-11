@@ -22,7 +22,7 @@ export function* userLogin(action) {
       sendPushNotifications(action.deviceTokens, action.username+' is now online.');
       yield put(loginSuccess(student));
       Actions.mainScreen();
-      yield put(ToastActionsCreators.displayInfo('Welcome... '+action.username, 5000));
+      yield put(ToastActionsCreators.displayInfo('Welcome '+action.username, 5000));
   }
   catch(e)
   {
