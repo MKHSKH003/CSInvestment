@@ -16,18 +16,11 @@ namespace CSInvestmentApi.Services
 
         public Student Authentication(string username, string password)
         {
-            var entry = _ticketSystemDbContext.Student.SingleOrDefault(user => user.Name == username && user.Password == password);
-
-            if (entry !=null)
-            {
-                _statisticsService.LogEvent(username, "logged-in");
-            }
-            return entry;
+            return _ticketSystemDbContext.Student.SingleOrDefault(user => user.Name == username && user.Password == password);
         }
 
         public void logout(string username)
         {
-            _statisticsService.LogEvent(username, "logged-off");
         }
 
     }

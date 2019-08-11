@@ -11,7 +11,7 @@ import {
   deleteMarketUpdateSuccess
 } from './actions';
 
-import {marketUpdatesApi} from '../../../../../api'
+import { marketUpdatesApi } from '../../../../../api'
 import { marketUpdatesBaseUrl } from '../../../../../shared/constants/api-selectors'
 
 export function* marketUpdates(action) {
@@ -35,12 +35,13 @@ export function* watcherMarketUpdates() {
 export function* deletetMarketUpdate(action) {
   try 
   {   
-      //yield call(marketUpdatesApi.deleteMarketUpdate, marketUpdatesBaseUrl, action.id);
+      yield call(marketUpdatesApi.deleteMarketUpdate, marketUpdatesBaseUrl, action.id);
       yield put(ToastActionsCreators.displayInfo('Market update deleted successfully!', 5000));
       yield put(deleteMarketUpdateSuccess(action.id));
   }
   catch(e)
   {
+    console.log(e.message)
     yield put(ToastActionsCreators.displayError(e.message, 2000));
   }
 

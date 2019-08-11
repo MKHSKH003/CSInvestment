@@ -27,7 +27,7 @@ namespace CSInvestmentApi.Controllers
 
         [HttpGet("logout")]
         public void Logout([FromQuery] string username)
-         {
+        {
            _loginService.logout(username);
         }
     }

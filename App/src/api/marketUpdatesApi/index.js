@@ -1,10 +1,8 @@
 export const getMarketUpdates = (marketUpdatesBaseUrl) =>
-    fetch(marketUpdatesBaseUrl + `get-market-updates`)
-        .then(response => response.json());
+    fetch(marketUpdatesBaseUrl + `get-market-updates`).then(response => response.json());
 
 export const deleteMarketUpdate = (marketUpdatesBaseUrl, id) =>
     fetch(marketUpdatesBaseUrl + `delete-market-update?id=${id}`)
-        .then(response => response.json())
 
 
 export const postMarketUpdates = (marketUpdatesBaseUrl, avatar, caption) =>

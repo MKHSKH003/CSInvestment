@@ -50,7 +50,6 @@ namespace CSInvestmentApi.Services
 
         public void UpdatePaymentStatus(int id, string username)
         {
-            _eventLoggerService.LogEvent(username, "update-payment-status");
             var student = _ticketSystemDbContext.Student.Find(id);
             student.PaymentStatus = "Paid";
             _ticketSystemDbContext.Student.Update(student);
@@ -59,9 +58,17 @@ namespace CSInvestmentApi.Services
 
         public void Delete(int id, string username)
         {
-            _eventLoggerService.LogEvent(username, "delete-student");
-            var student = _ticketSystemDbContext.Student.Find(id);
-            _ticketSystemDbContext.Student.Remove(student);
+            RemoveUserAppResources(id);
+
+            _ticketSystemDbContext.SaveChanges();
+        }
+
+        public void RemoveUserAppResources(int id)
+        {
+            _ticketSystemDbContext.Student.Remove(_ticketSystemDbContext.Student.Find(id));
+            _ticketSystemDbContext.StudentCourse.RemoveRange(_ticketSystemDbContext.StudentCourse.Where(sc => sc.StudentId == id));
+            _ticketSystemDbContext.StudentChatRoom.RemoveRange(_ticketSystemDbContext.StudentChatRoom.Where(scr => scr.StudentId == id));
+
             _ticketSystemDbContext.SaveChanges();
         }
 
@@ -76,7 +83,6 @@ namespace CSInvestmentApi.Services
             else if(results.Equals("true"))
             {
                 SendConfirmationEmail( name, email);
-                _eventLoggerService.LogEvent(createdBy, "new-student");
 
                 _ticketSystemDbContext.Student.Add(new Student()
                 {
@@ -123,7 +129,7 @@ namespace CSInvestmentApi.Services
             _ticketSystemDbContext.SaveChanges();
         }
 
-        public void RemoveDeleteStudentCourse(int StudentCourseId)
+        public void RemoveStudentCourse(int StudentCourseId)
         {
             var _studentCourse = _ticketSystemDbContext.StudentCourse.Find(StudentCourseId);
             _ticketSystemDbContext.StudentCourse.Remove(_studentCourse);

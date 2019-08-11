@@ -8,6 +8,5 @@ namespace CSInvestmentApi.Services
 {
     public interface IStatisticsService
     {
-        void LogEvent(string username, string key);
     }
 }

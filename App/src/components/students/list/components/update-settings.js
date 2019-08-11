@@ -92,8 +92,6 @@ export default class UpdateSettings extends Component {
     const imagePlaceHolder = 'https://img.icons8.com/ios/48/000000/gender-neutral-user.png';
     return (
         <Modal
-          animationType={'fade'}
-          transparent={false}
           onRequestClose={() => setModalVisible(false)}
           visible={modalVisible}>
 

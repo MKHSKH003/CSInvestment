@@ -13,9 +13,9 @@ import ImageLoad from 'react-native-image-placeholder';
 
 import appsettings from '../../../../../app.json';
 const courses = [
-  { label: 'Beginner', value: 1 },
-  { label: 'Intermediate', value: 2 },
-  { label: 'Advanced', value: 3 }
+  { label: 'Beginner', value: '1' },
+  { label: 'Intermediate', value: '2' },
+  { label: 'Advanced', value: '3' }
 ]
 
 export default class UpdateStudent extends Component {
@@ -103,7 +103,6 @@ export default class UpdateStudent extends Component {
     const imagePlaceHolder = 'https://img.icons8.com/ios/48/000000/gender-neutral-user.png';
     return (
         <Modal
-
           onRequestClose={() => setModalVisible(false)}
           visible={modalVisible}>
 

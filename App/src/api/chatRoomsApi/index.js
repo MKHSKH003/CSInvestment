@@ -1,5 +1,3 @@
 export const getGroups = (chatRoomsBaseUrl) =>
-{
-    return fetch(chatRoomsBaseUrl+`get-chat-rooms`)
-           .then(response =>{return response.json()});
-};
+    fetch(chatRoomsBaseUrl+`get-chat-rooms`)
+           .then(response => response.json());
