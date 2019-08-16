@@ -3,7 +3,10 @@ import {
    LOAD_MARKET_UPDATES_SUCCESS,
    LOAD_MARKET_UPDATES__SYSTEM_DATA_REQUEST,
    DELETE_MARKET_UPDATE_SUCCESS,
-   POST_MARKET_UPDATES_SUCCESS
+   POST_MARKET_UPDATE_REQUEST,
+   POST_MARKET_UPDATE_SUCCESS,
+   POST_LIKE_REQUEST,
+   POST_LIKE_SUCCESS
 } from './actions'
 
 export const initialState = {
@@ -42,10 +45,33 @@ export default (state = initialState, action) => {
             ...state,
             marketUpdates: state.marketUpdates.filter(mu => mu.Id != action.id)
          };
-      case POST_MARKET_UPDATES_SUCCESS:
+      case POST_MARKET_UPDATE_REQUEST:
          return {
             ...state,
-            marketUpdates: ([{ 'Id': 0, 'Avatar': action.avatar, 'Caption': action.caption }]).concat(state.marketUpdates)
+            status: {
+               loading: true
+            }
+         };
+      case POST_MARKET_UPDATE_SUCCESS:
+         return {
+            ...state,
+            marketUpdates: ([{
+               ...action.post,
+               Student: action.currentUser
+            }]).concat(state.marketUpdates),
+            status: {
+               loading: false
+            }
+         };
+      case POST_LIKE_REQUEST:
+         return {
+            ...state,
+            marketUpdates: state.marketUpdates.map(mu => (
+               mu.Id == action.id ? {
+                  ...mu,
+                  PostLikes: mu.PostLikes.concat({StudentId: action.userId, PostId: action.id})
+               } : mu
+            ))
          };
       default:
          return state;

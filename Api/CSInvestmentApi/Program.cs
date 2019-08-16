@@ -14,7 +14,7 @@ namespace CSInvestmentApi
         {
             var host = new WebHostBuilder()
                 .UseKestrel()
-                .UseUrls("http://*:5200")
+                .UseUrls("http://*:5202")
                 .UseContentRoot(Directory.GetCurrentDirectory())
                 .UseIISIntegration()
                 .UseStartup<Startup>()

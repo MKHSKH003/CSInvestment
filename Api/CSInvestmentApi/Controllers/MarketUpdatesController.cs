@@ -21,15 +21,21 @@ namespace CSInvestmentApi.Controllers
         }
 
         [HttpPost("post-market-update")]
-        public Post Post([FromBody] string url, [FromQuery] string caption)
+        public Post Post([FromBody] string url, [FromQuery] string caption, [FromQuery] int userId)
         {
-            return _marketUpdatesService.Post(url, caption);
+            return _marketUpdatesService.Post(url, caption, userId);
         }
 
         [HttpGet("delete-market-update")]
         public void Delete([FromQuery] int id)
         {
             _marketUpdatesService.Delete(id);
+        }
+
+        [HttpGet("add-post-like")]
+        public void addPostLike([FromQuery] int id, [FromQuery] int userId)
+        {
+            _marketUpdatesService.addPostLike(id, userId);
         }
 
     }

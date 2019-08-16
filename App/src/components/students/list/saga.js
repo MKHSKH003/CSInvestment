@@ -27,7 +27,7 @@ import sendPushNotifications from '../../../shared/utils/send-push-notifications
 export function* getStudents() {
   try 
   {   
-      const students = yield call(studentsApi.getStudents,studentsBaseUrl);
+      const students = yield call(studentsApi.getStudents, studentsBaseUrl);
       if(students==undefined){throw Error;}
       yield put(loadStudentsSuccess(students));
   }

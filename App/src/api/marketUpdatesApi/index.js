@@ -4,9 +4,11 @@ export const getMarketUpdates = (marketUpdatesBaseUrl) =>
 export const deleteMarketUpdate = (marketUpdatesBaseUrl, id) =>
     fetch(marketUpdatesBaseUrl + `delete-market-update?id=${id}`)
 
+export const postLike = (marketUpdatesBaseUrl, id, userId) =>
+    fetch(marketUpdatesBaseUrl + `add-post-like?id=${id}&userId=${userId}`)
 
-export const postMarketUpdates = (marketUpdatesBaseUrl, avatar, caption) =>
-    fetch(marketUpdatesBaseUrl + `post-market-update?caption=${caption}`,
+export const postMarketUpdates = (marketUpdatesBaseUrl, avatar, caption, userId) =>
+    fetch(marketUpdatesBaseUrl + `post-market-update?caption=${caption}&userId=${userId}`,
         {
             method: 'POST',
             body: JSON.stringify(avatar),

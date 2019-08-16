@@ -15,9 +15,9 @@ namespace CSInvestmentApi.Controllers
         }
 
         [HttpGet("get-courses")]
-        public IEnumerable<Entities.Course> Get()
+        public ActionResult<IEnumerable<Entities.Course>> Get()
         {
-            return _coursesService.Get();
+            return Ok(_coursesService.Get());
         }
 
         [HttpGet("get-student-courses")]

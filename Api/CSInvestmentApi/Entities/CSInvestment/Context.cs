@@ -22,7 +22,7 @@ namespace CSInvestmentApi.Entities
         public virtual DbSet<Student> Student { get; set; }
         public virtual DbSet<StudentCourse> StudentCourse { get; set; }
         public virtual DbSet<StudentChatRoom> StudentChatRoom { get; set; }
-
+        public virtual DbSet<PostLike> PostLikes { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -128,8 +128,6 @@ namespace CSInvestmentApi.Entities
                     .IsRequired()
                     .HasMaxLength(255)
                     .IsUnicode(false);
-
-                entity.Property(e => e.DatetTimeStamp).HasDefaultValueSql("CURRENT_TIMESTAMP");
 
                 entity.Property(e => e.UserMessage)
                     .IsRequired()
@@ -280,6 +278,29 @@ namespace CSInvestmentApi.Entities
                    .HasForeignKey(e => e.ChatRoomId)
                    .HasConstraintName("FK_StudentChatRoom_ChatRoom");
 
+            });
+
+            modelBuilder.Entity<PostLike>(entity =>
+            {
+                entity.ToTable("PostLike", database);
+
+                entity.HasIndex(e => e.PostId)
+                    .HasName("FK_PostLike_Post");
+
+                entity.HasIndex(e => e.StudentId)
+                    .HasName("FK_PostLike_Student");
+
+                entity.Property(e => e.Id)
+                    .HasColumnName("ID")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.PostId)
+                    .HasColumnName("PostID")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.StudentId)
+                    .HasColumnName("StudentID")
+                    .HasColumnType("int(11)");
             });
         }
     }
