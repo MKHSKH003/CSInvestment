@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -13,6 +9,7 @@ using CSInvestmentApi.Model;
 using Microsoft.AspNetCore.Mvc.Formatters;
 using Newtonsoft.Json;
 using System.Buffers;
+using Swashbuckle.AspNetCore.Swagger;
 
 namespace CSInvestmentApi
 {
@@ -27,7 +24,6 @@ namespace CSInvestmentApi
                 .AddEnvironmentVariables();
             Configuration = builder.Build();
         }
-
 
         public IConfigurationRoot Configuration { get;}
 
@@ -59,6 +55,18 @@ namespace CSInvestmentApi
                     ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
                 }, ArrayPool<char>.Shared));
             });
+
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new Info
+                {
+                    Version = "1.0.8",
+                    Title = "CS Investment API",
+                    Description = "CS Investment ASP.NET Core Web API",
+                    TermsOfService = "None",
+                    Contact = new Contact() { Name = "Talking Dotnet", Email = "contact@talkingdotnet.com", Url = "www.talkingdotnet.com" }
+                });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -67,7 +75,17 @@ namespace CSInvestmentApi
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
 
+            if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+            }
+
             app.UseMvc();
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "CS Investment API 1.0.8");
+            });
         }
     }
 }

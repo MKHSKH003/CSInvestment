@@ -16,7 +16,6 @@ namespace CSInvestmentApi.Services
         public IEnumerable<Message> GetChatMessages(int id)
         {
             return _ticketSystemDbContext.Message.Where(m => m.ChatRoomId == id)
-                .OrderBy(m => m.DatetTimeStamp)
                 .ToList();
         }
 

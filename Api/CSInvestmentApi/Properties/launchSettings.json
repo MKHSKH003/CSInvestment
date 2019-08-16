@@ -18,11 +18,11 @@
     "CSInvestmentApi": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "http://localhost:5200/welcome/welcome-note",
+      "launchUrl": "http://localhost:5202/swagger/index.html",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
-      "applicationUrl": "http://localhost:5200/"
+      "applicationUrl": "http://localhost:5202/"
     }
   }
 }

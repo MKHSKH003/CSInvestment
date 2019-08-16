@@ -9,7 +9,6 @@ namespace CSInvestmentApi.Entities
         public string UserMessage { get; set; }
         public string Date { get; set; }
         public int StudentId { get; set; }
-        public DateTime? DatetTimeStamp { get; set; }
 
         public Student Student { get; set; }
     }

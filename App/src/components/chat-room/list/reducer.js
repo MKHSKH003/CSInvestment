@@ -55,7 +55,7 @@ export default (state = initialState, action) => {
             groups: state.groups.map(g => (
                g.Id == action.id ? {
                   ...g,
-                  Messages: ([{ 'Date': getTimeStamp(), 'ChatRoomId': action.id, 'UserMessage': action.message, 'Student': { 'Name': action.username } }]).concat(g.Messages),
+                  Messages: g.Messages.concat(([{ 'Id':Math.max(...(g.Messages).map(m => m.Id))+1, 'Date': getTimeStamp(), 'ChatRoomId': action.id, 'UserMessage': action.message, 'Student': { 'Name': action.username } }])),
                } : g
             )),
 

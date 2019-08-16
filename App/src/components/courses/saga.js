@@ -18,6 +18,7 @@ export function* getCourses() {
   try 
   {   
       const courses = yield call(coursesApi.getCourses, coursesBaseUrl);
+      console.log('courses', courses);
       if(courses==undefined){throw Error;}
       yield put(loadCoursesSuccess(courses));
   }
