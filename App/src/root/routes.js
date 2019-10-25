@@ -6,11 +6,11 @@ import MainScreen from '../components/main-screen/components/page/component';
 import AddStudent from '../components/new-student/components/page/container';
 import ViewStudents from '../components/students/list/components/page/container'
 import Courses from '../components/courses/components/page/container'
-import FinancialEducation from '../components/financial-education/list/components/page/container'
+import FinancialEducation from '../components/financial-education/list/page/container'
 import Statistics from '../components/statistics/components/page/container';
 import ChatRooms from '../components/chat-room/list/components/page/container';
 import ChatRoom from '../components/chat-room/view/components/page/container';
-import MarketUpdates from '../components/financial-education/view/components/market-updates/components/page/container'
+import MarketUpdates from '../components/financial-education/view/market-updates/components/page/container'
 
 export default class Routes extends Component {
   render() {
@@ -23,6 +23,12 @@ export default class Routes extends Component {
 	          	hideNavBar={true}
 	          	initial={true}
 	        />
+			<Scene key="mainScreen"
+	          component={MainScreen}
+	          animation='fade'
+	          hideNavBar={true}
+	        />
+			
 			<Scene key="mainScreen"
 	          component={MainScreen}
 	          animation='fade'

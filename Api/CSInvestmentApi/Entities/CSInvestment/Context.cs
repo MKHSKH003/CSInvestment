@@ -23,6 +23,7 @@ namespace CSInvestmentApi.Entities
         public virtual DbSet<StudentCourse> StudentCourse { get; set; }
         public virtual DbSet<StudentChatRoom> StudentChatRoom { get; set; }
         public virtual DbSet<PostLike> PostLikes { get; set; }
+        public virtual DbSet<Comment> Comments { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -301,6 +302,34 @@ namespace CSInvestmentApi.Entities
                 entity.Property(e => e.StudentId)
                     .HasColumnName("StudentID")
                     .HasColumnType("int(11)");
+            });
+
+            modelBuilder.Entity<Comment>(entity =>
+            {
+                entity.ToTable("Comment", database);
+
+                entity.HasIndex(e => e.PostId)
+                    .HasName("FK_Comment_Post");
+
+                entity.HasIndex(e => e.StudentId)
+                    .HasName("FK_Comment_Student");
+
+                entity.Property(e => e.Id)
+                    .HasColumnName("ID")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.PostId)
+                    .HasColumnName("PostID")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.StudentId)
+                    .HasColumnName("StudentID")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.UserComment)
+                    .IsRequired()
+                    .HasMaxLength(500)
+                    .IsUnicode(false);
             });
         }
     }

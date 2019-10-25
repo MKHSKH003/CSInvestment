@@ -37,6 +37,10 @@ namespace CSInvestmentApi.Controllers
         {
             _marketUpdatesService.addPostLike(id, userId);
         }
-
+        [HttpPost("post-comment")]
+        public void addComment([FromBody] Comment comment)
+        {
+            _marketUpdatesService.addComment(comment);
+        }
     }
 }

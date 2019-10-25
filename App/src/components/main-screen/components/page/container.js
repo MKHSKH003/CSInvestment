@@ -7,7 +7,7 @@ import { loadCoursesRequest, loadStudentCoursesRequest } from '../../../courses/
 import { storeUserDeviceRequest } from '../../actions'
 import { loadAllMessagesRequest } from '../../../chat-room/view/actions'
 import { loadGroupsRequest } from '../../../chat-room/list/actions'
-import { loadMarketUpdatesRequest} from '../../../financial-education/view/components/market-updates/actions'
+import { loadMarketUpdatesRequest} from '../../../financial-education/view/market-updates/actions'
 
 const mapStateToProps = (state) => ({
     currentUser: state.loginReducer.student
