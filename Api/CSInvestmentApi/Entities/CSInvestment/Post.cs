@@ -7,6 +7,7 @@ namespace CSInvestmentApi.Entities
         public Post()
         {
             PostLikes = new HashSet<PostLike>();
+            Comments = new HashSet<Comment>();
         }
 
         public int Id { get; set; }
@@ -17,5 +18,6 @@ namespace CSInvestmentApi.Entities
 
         public Student Student { get; set; }
         public ICollection<PostLike> PostLikes { get; set; }
+        public ICollection<Comment> Comments { get; set; }
     }
 }

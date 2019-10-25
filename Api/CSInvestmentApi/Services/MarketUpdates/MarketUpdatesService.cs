@@ -19,6 +19,8 @@ namespace CSInvestmentApi.Services
             return _ticketSystemDbContext.Post
                 .Include(p => p.Student)
                 .Include(p => p.PostLikes)
+                .Include(p => p.Comments)
+                    .ThenInclude(c => c.Student)
                 .OrderBy(post => post.Datetime);
         }
 
@@ -47,6 +49,19 @@ namespace CSInvestmentApi.Services
             };
 
             _ticketSystemDbContext.PostLikes.Add(postLike);
+            _ticketSystemDbContext.SaveChanges();
+        }
+
+        public void addComment(Comment comment)
+        {
+            Comment dbComment = new Comment()
+            {
+                PostId = comment.PostId,
+                StudentId = comment.StudentId,
+                UserComment = comment.UserComment
+            };
+
+            _ticketSystemDbContext.Comments.Add(dbComment);
             _ticketSystemDbContext.SaveChanges();
         }
 

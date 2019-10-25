@@ -15,9 +15,21 @@ export const postMarketUpdates = (marketUpdatesBaseUrl, avatar, caption, userId)
             headers: {
                 'Content-Type': 'application/json'
             }
-        }).then((response) => response.json())
+        }).then(response => response.json())
 
+export const sendComment = (marketUpdatesBaseUrl, comment) =>
+{
+    console.log('marketUpdatesBaseUrl', marketUpdatesBaseUrl, comment);
+    fetch(marketUpdatesBaseUrl + `post-comment`,
+        {
+            method: 'POST',
+            body: JSON.stringify(comment),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
 
+}
 
 
 

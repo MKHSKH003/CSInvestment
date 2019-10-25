@@ -9,5 +9,6 @@ namespace CSInvestmentApi.Services
         Post Post(string avatar, string caption, int userId);
         void Delete(int id);
         void addPostLike(int id, int userId);
+        void addComment(Comment comment);
     }
 }

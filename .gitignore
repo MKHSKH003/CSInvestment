@@ -5,3 +5,4 @@
 bin
 /Api/CSInvestmentApi/obj
 /App/package-lock.json
+/Api/build
